@@ -43,7 +43,7 @@
                  : 1;
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(99, 102, 241, ${this.alpha * fade})`;
+      ctx.fillStyle = `rgba(192, 112, 56, ${this.alpha * fade})`;
       ctx.fill();
     }
   }
@@ -60,7 +60,7 @@
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(99, 102, 241, ${(1 - dist / maxDist) * 0.08})`;
+          ctx.strokeStyle = `rgba(192, 112, 56, ${(1 - dist / maxDist) * 0.1})`;
           ctx.lineWidth = 0.5;
           ctx.stroke();
         }
@@ -104,10 +104,10 @@
   const el = document.getElementById('roleText');
   if (!el) return;
   const roles = [
-    'Full-Stack Developer',
-    'UI / UX Designer',
-    'Creative Coder',
-    'Open Source Enthusiast',
+    'Landscape Photographer',
+    'Portrait & Wedding Photographer',
+    'Fine Art Print Maker',
+    'Idaho Native & Explorer',
   ];
   let roleIdx = 0, charIdx = 0, deleting = false;
 
@@ -286,7 +286,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   glow.style.cssText = `
     position: fixed; pointer-events: none; z-index: 9999;
     width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(192,112,56,0.07) 0%, transparent 70%);
     border-radius: 50%; transform: translate(-50%, -50%);
     transition: left 0.12s ease, top 0.12s ease;
     will-change: left, top;
@@ -318,6 +318,26 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
       card.style.transform = '';
       card.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
       setTimeout(() => card.style.transition = '', 500);
+    });
+  });
+})();
+
+// ── PORTFOLIO FILTER ──────────────────────────────────────────────────────────
+(function portfolioFilter() {
+  const btns  = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.photo-card');
+  if (!btns.length) return;
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+
+      cards.forEach(card => {
+        const match = filter === 'all' || card.dataset.category === filter;
+        card.classList.toggle('hidden', !match);
+      });
     });
   });
 })();

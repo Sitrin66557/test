@@ -3,20 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mr. Trent Frent — Developer & Designer</title>
+  <title>Dave Beeples — Photographer</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&family=Fira+Code:wght@400&display=swap" rel="stylesheet" />
 </head>
 <body>
 
   <!-- Navigation -->
   <nav class="nav" id="nav">
-    <div class="nav__logo">TF</div>
+    <div class="nav__logo">DB</div>
     <ul class="nav__links">
       <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav__burger" id="burger">
@@ -28,22 +29,23 @@
   <section class="hero" id="hero">
     <div class="hero__bg">
       <canvas id="particles"></canvas>
+      <div class="hero__mountains"></div>
     </div>
     <div class="hero__content">
-      <p class="hero__greeting reveal-fade">Hello, I'm</p>
+      <p class="hero__greeting reveal-fade">Idaho's Premier Photographer</p>
       <h1 class="hero__name">
-        <span class="reveal-slide">Mr. Trent</span>
-        <span class="reveal-slide delay-1">Frent</span>
+        <span class="reveal-slide">Dave</span>
+        <span class="reveal-slide delay-1">Beeples</span>
       </h1>
       <div class="hero__roles">
         <span class="role-text" id="roleText"></span><span class="cursor">|</span>
       </div>
       <p class="hero__desc reveal-fade delay-2">
-        I craft elegant digital experiences that live at the intersection of design and technology.
+        Capturing the raw beauty of the American West — from the rugged peaks of the Sawtooth Mountains to the quiet moments that make life extraordinary.
       </p>
       <div class="hero__cta reveal-fade delay-3">
-        <a href="#projects" class="btn btn--primary">View My Work</a>
-        <a href="#contact" class="btn btn--outline">Get In Touch</a>
+        <a href="#portfolio" class="btn btn--primary">View Portfolio</a>
+        <a href="#contact" class="btn btn--outline">Book a Session</a>
       </div>
     </div>
     <div class="hero__scroll">
@@ -57,15 +59,104 @@
     <div class="container">
       <div class="section__header">
         <span class="section__tag scroll-reveal">01 / About</span>
-        <h2 class="section__title scroll-reveal">Who I Am</h2>
+        <h2 class="section__title scroll-reveal">The Man Behind the Lens</h2>
       </div>
       <div class="about__grid">
         <div class="about__image scroll-reveal">
           <div class="about__img-wrapper">
+            <!-- SVG Portrait of Dave -->
             <div class="about__img-placeholder">
-              <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="100" cy="75" r="45" fill="#6366f1" opacity="0.8"/>
-                <ellipse cx="100" cy="175" rx="70" ry="50" fill="#6366f1" opacity="0.8"/>
+              <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" class="portrait-svg">
+                <!-- Background gradient -->
+                <defs>
+                  <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#e8e0d5"/>
+                    <stop offset="100%" style="stop-color:#d4c9b8"/>
+                  </linearGradient>
+                  <linearGradient id="skinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#d4956a"/>
+                    <stop offset="100%" style="stop-color:#b8784a"/>
+                  </linearGradient>
+                  <linearGradient id="shirtGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#3d5a4c"/>
+                    <stop offset="100%" style="stop-color:#2a3f35"/>
+                  </linearGradient>
+                  <linearGradient id="cameraGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#444"/>
+                    <stop offset="100%" style="stop-color:#222"/>
+                  </linearGradient>
+                  <radialGradient id="lensGrad" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" style="stop-color:#7eb8d4"/>
+                    <stop offset="40%" style="stop-color:#4a8fa8"/>
+                    <stop offset="100%" style="stop-color:#1a3a4a"/>
+                  </radialGradient>
+                </defs>
+                <!-- Background -->
+                <rect width="400" height="500" fill="url(#bgGrad)" rx="20"/>
+                <!-- Subtle Idaho landscape silhouette in bg -->
+                <ellipse cx="200" cy="480" rx="250" ry="60" fill="#c8bfb0" opacity="0.4"/>
+                <path d="M0 380 Q50 340 80 360 Q120 320 150 345 Q180 300 200 320 Q230 290 260 315 Q290 280 320 305 Q350 270 380 295 L400 380 Z" fill="#b8af9f" opacity="0.35"/>
+                <!-- Body / Torso -->
+                <path d="M90 500 L90 340 Q90 300 130 285 L200 270 L270 285 Q310 300 310 340 L310 500 Z" fill="url(#shirtGrad)"/>
+                <!-- Collar -->
+                <path d="M165 280 L200 310 L235 280 L220 270 L200 290 L180 270 Z" fill="#f0ebe3"/>
+                <!-- Neck -->
+                <rect x="178" y="235" width="44" height="50" rx="8" fill="url(#skinGrad)"/>
+                <!-- Head -->
+                <ellipse cx="200" cy="200" rx="75" ry="85" fill="url(#skinGrad)"/>
+                <!-- Hair -->
+                <path d="M128 175 Q130 110 200 105 Q270 110 272 175 Q265 140 250 130 Q230 120 200 118 Q170 120 150 130 Q135 140 128 175 Z" fill="#3d2b1f"/>
+                <!-- Hair sides -->
+                <path d="M128 175 Q122 200 128 220 Q132 200 135 185 Z" fill="#3d2b1f"/>
+                <path d="M272 175 Q278 200 272 220 Q268 200 265 185 Z" fill="#3d2b1f"/>
+                <!-- Ears -->
+                <ellipse cx="127" cy="205" rx="12" ry="16" fill="#c98055"/>
+                <ellipse cx="273" cy="205" rx="12" ry="16" fill="#c98055"/>
+                <!-- Eyes -->
+                <ellipse cx="172" cy="195" rx="14" ry="11" fill="white"/>
+                <ellipse cx="228" cy="195" rx="14" ry="11" fill="white"/>
+                <circle cx="174" cy="196" r="8" fill="#3d2b1f"/>
+                <circle cx="230" cy="196" r="8" fill="#3d2b1f"/>
+                <circle cx="176" cy="193" r="2.5" fill="white"/>
+                <circle cx="232" cy="193" r="2.5" fill="white"/>
+                <!-- Eyebrows -->
+                <path d="M158 181 Q172 175 186 180" stroke="#3d2b1f" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                <path d="M214 180 Q228 175 242 181" stroke="#3d2b1f" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                <!-- Nose -->
+                <path d="M196 200 Q192 220 188 228 Q200 233 212 228 Q208 220 204 200" fill="#c98055" opacity="0.5"/>
+                <!-- Smile -->
+                <path d="M178 248 Q200 262 222 248" stroke="#8b5a3c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <!-- Beard / stubble -->
+                <path d="M155 240 Q160 270 200 278 Q240 270 245 240 Q230 255 200 260 Q170 255 155 240 Z" fill="#3d2b1f" opacity="0.25"/>
+                <!-- Arms -->
+                <path d="M90 340 Q60 360 55 410 Q70 415 80 410 Q82 375 105 355 Z" fill="url(#skinGrad)"/>
+                <path d="M310 340 Q340 360 345 410 Q330 415 320 410 Q318 375 295 355 Z" fill="url(#skinGrad)"/>
+                <!-- Camera body -->
+                <rect x="100" y="370" width="160" height="105" rx="10" fill="url(#cameraGrad)"/>
+                <rect x="108" y="378" width="144" height="89" rx="7" fill="#333"/>
+                <!-- Camera grip -->
+                <rect x="220" y="358" width="40" height="55" rx="8" fill="#2a2a2a"/>
+                <!-- Lens -->
+                <circle cx="172" cy="420" r="36" fill="#1a1a1a"/>
+                <circle cx="172" cy="420" r="30" fill="#222"/>
+                <circle cx="172" cy="420" r="24" fill="url(#lensGrad)"/>
+                <circle cx="172" cy="420" r="18" fill="#1a3a4a" opacity="0.8"/>
+                <circle cx="164" cy="412" r="5" fill="white" opacity="0.3"/>
+                <!-- Camera top buttons -->
+                <circle cx="225" cy="372" r="6" fill="#555"/>
+                <circle cx="243" cy="370" r="4" fill="#666"/>
+                <rect x="108" y="378" width="40" height="15" rx="3" fill="#3a3a3a"/>
+                <!-- Viewfinder -->
+                <rect x="218" y="382" width="28" height="18" rx="3" fill="#1a1a1a"/>
+                <rect x="220" y="384" width="24" height="14" rx="2" fill="#2a4a5a"/>
+                <!-- Hands holding camera -->
+                <path d="M55 410 Q50 430 60 445 Q75 450 95 440 Q100 420 100 405 Z" fill="#c98055"/>
+                <path d="M345 410 Q350 430 340 445 Q325 450 305 440 Q300 420 300 405 Z" fill="#c98055"/>
+                <!-- Shirt pocket -->
+                <rect x="215" y="310" width="35" height="28" rx="4" fill="#334e42" opacity="0.6"/>
+                <!-- Strap -->
+                <path d="M130 285 Q100 320 85 370" stroke="#8b6914" stroke-width="8" fill="none" stroke-linecap="round"/>
+                <path d="M270 285 Q300 320 315 370" stroke="#8b6914" stroke-width="8" fill="none" stroke-linecap="round"/>
               </svg>
             </div>
             <div class="about__img-deco"></div>
@@ -73,25 +164,30 @@
         </div>
         <div class="about__text">
           <p class="scroll-reveal">
-            I'm a full-stack developer and UI/UX designer based in San Francisco with a passion for building
-            products that make a difference. I love the challenge of turning complex problems into simple,
-            beautiful solutions.
+            Hey, I'm Dave — a photographer born and raised in Boise, Idaho. For over 12 years I've been chasing light
+            across the Gem State, from the mirror-flat Snake River at dawn to the wildflower meadows of the Sawtooth Wilderness.
           </p>
           <p class="scroll-reveal">
-            When I'm not coding, you'll find me hiking trails, experimenting with photography, or reading
-            about the latest advancements in AI and design systems.
+            Photography, to me, is about connection. Whether I'm photographing a couple on their wedding day, a family's
+            annual portrait, or the solitary grandeur of a mountain ridge at golden hour — I believe every frame tells
+            a story worth preserving.
+          </p>
+          <p class="scroll-reveal">
+            My work has been featured in <em>Idaho Magazine</em>, <em>Outdoor Photographer</em>, and the
+            <em>Boise Weekly</em>. When I'm not behind the lens, you'll find me fly fishing the Henry's Fork or
+            hiking trails with my dog, Scout.
           </p>
           <div class="about__stats scroll-reveal">
             <div class="stat">
-              <span class="stat__number" data-target="5">0</span><span>+</span>
-              <span class="stat__label">Years Experience</span>
+              <span class="stat__number" data-target="12">0</span><span>+</span>
+              <span class="stat__label">Years Shooting</span>
             </div>
             <div class="stat">
-              <span class="stat__number" data-target="40">0</span><span>+</span>
-              <span class="stat__label">Projects Completed</span>
+              <span class="stat__number" data-target="850">0</span><span>+</span>
+              <span class="stat__label">Sessions Done</span>
             </div>
             <div class="stat">
-              <span class="stat__number" data-target="20">0</span><span>+</span>
+              <span class="stat__number" data-target="98">0</span><span>%</span>
               <span class="stat__label">Happy Clients</span>
             </div>
           </div>
@@ -100,125 +196,222 @@
     </div>
   </section>
 
-  <!-- Skills -->
-  <section class="skills section" id="skills">
+  <!-- Services -->
+  <section class="services section" id="services">
     <div class="container">
       <div class="section__header">
-        <span class="section__tag scroll-reveal">02 / Skills</span>
-        <h2 class="section__title scroll-reveal">What I Do</h2>
+        <span class="section__tag scroll-reveal">02 / Services</span>
+        <h2 class="section__title scroll-reveal">What I Offer</h2>
       </div>
-      <div class="skills__grid">
-        <div class="skill-card scroll-reveal" data-delay="0">
-          <div class="skill-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <div class="services__grid">
+        <div class="service-card scroll-reveal" data-delay="0">
+          <div class="service-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </div>
-          <h3>Frontend Dev</h3>
-          <p>React, Vue, TypeScript, Next.js, animations & pixel-perfect UI implementation.</p>
-          <div class="skill-bar"><div class="skill-bar__fill" data-width="92"></div></div>
+          <h3>Weddings & Engagements</h3>
+          <p>Your love story, beautifully told. Full-day or half-day coverage, engagement sessions, and custom albums that become heirlooms.</p>
+          <span class="service-card__price">From $1,800</span>
         </div>
-        <div class="skill-card scroll-reveal" data-delay="100">
-          <div class="skill-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <div class="service-card scroll-reveal" data-delay="100">
+          <div class="service-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
-          <h3>UI/UX Design</h3>
-          <p>Figma, design systems, prototyping, user research, and accessibility-first thinking.</p>
-          <div class="skill-bar"><div class="skill-bar__fill" data-width="85"></div></div>
+          <h3>Family Portraits</h3>
+          <p>Relaxed, genuine sessions at Idaho's most scenic spots. Outdoor settings in every season — golden fields, snowy peaks, riverside magic.</p>
+          <span class="service-card__price">From $350</span>
         </div>
-        <div class="skill-card scroll-reveal" data-delay="200">
-          <div class="skill-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        <div class="service-card scroll-reveal" data-delay="200">
+          <div class="service-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           </div>
-          <h3>Backend Dev</h3>
-          <p>Node.js, Python, PostgreSQL, REST APIs, GraphQL, and cloud infrastructure.</p>
-          <div class="skill-bar"><div class="skill-bar__fill" data-width="78"></div></div>
+          <h3>Landscape & Nature</h3>
+          <p>Fine-art prints of Idaho's breathtaking wilderness. Limited edition prints available for homes, offices, and corporate spaces.</p>
+          <span class="service-card__price">Prints from $120</span>
         </div>
-        <div class="skill-card scroll-reveal" data-delay="300">
-          <div class="skill-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div class="service-card scroll-reveal" data-delay="300">
+          <div class="service-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
           </div>
-          <h3>DevOps & Cloud</h3>
-          <p>Docker, Kubernetes, CI/CD pipelines, AWS, Vercel, and monitoring solutions.</p>
-          <div class="skill-bar"><div class="skill-bar__fill" data-width="70"></div></div>
+          <h3>Commercial & Branding</h3>
+          <p>Product photography, headshots, and brand storytelling for Idaho businesses. Make your brand look as good as it is.</p>
+          <span class="service-card__price">From $600</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Projects -->
-  <section class="projects section" id="projects">
+  <!-- Portfolio -->
+  <section class="portfolio section" id="portfolio">
     <div class="container">
       <div class="section__header">
-        <span class="section__tag scroll-reveal">03 / Projects</span>
+        <span class="section__tag scroll-reveal">03 / Portfolio</span>
         <h2 class="section__title scroll-reveal">Recent Work</h2>
+        <p class="section__subtitle scroll-reveal">A selection of moments captured across Idaho and beyond.</p>
       </div>
-      <div class="projects__grid">
+      <div class="portfolio__filter scroll-reveal">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="landscape">Landscape</button>
+        <button class="filter-btn" data-filter="portrait">Portrait</button>
+        <button class="filter-btn" data-filter="wedding">Wedding</button>
+      </div>
+      <div class="portfolio__grid">
+        <div class="photo-card scroll-reveal" data-category="landscape" data-delay="0">
+          <div class="photo-card__img" style="--h:220;--s:65%;--l:35%">
+            <div class="photo-card__overlay">
+              <span>Sawtooth Range, Golden Hour</span>
+            </div>
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+              <rect width="400" height="300" fill="hsl(220,65%,35%)"/>
+              <rect y="200" width="400" height="100" fill="hsl(220,50%,25%)"/>
+              <polygon points="0,200 60,100 120,160 180,80 240,140 300,60 360,130 400,90 400,200" fill="hsl(220,45%,20%)"/>
+              <ellipse cx="80" cy="60" rx="50" ry="50" fill="hsl(45,90%,70%)" opacity="0.9"/>
+              <ellipse cx="80" cy="60" rx="70" ry="70" fill="hsl(35,90%,60%)" opacity="0.2"/>
+              <path d="M0 200 Q100 180 200 195 Q300 210 400 190 L400 300 L0 300 Z" fill="hsl(210,40%,18%)"/>
+            </svg>
+          </div>
+          <div class="photo-card__info">
+            <h4>Sawtooth Range</h4>
+            <span>Landscape</span>
+          </div>
+        </div>
+        <div class="photo-card scroll-reveal photo-card--tall" data-category="portrait" data-delay="100">
+          <div class="photo-card__img" style="--h:30;--s:40%;--l:60%">
+            <div class="photo-card__overlay">
+              <span>Family Portrait, Boise Foothills</span>
+            </div>
+            <svg viewBox="0 0 300 450" xmlns="http://www.w3.org/2000/svg">
+              <rect width="300" height="450" fill="hsl(30,40%,75%)"/>
+              <ellipse cx="150" cy="480" rx="250" ry="80" fill="hsl(90,40%,45%)" opacity="0.6"/>
+              <rect y="320" width="300" height="130" fill="hsl(90,35%,50%)" opacity="0.5"/>
+              <circle cx="150" cy="130" r="55" fill="hsl(30,50%,70%)"/>
+              <path d="M60 450 L60 300 Q60 260 110 245 L150 235 L190 245 Q240 260 240 300 L240 450 Z" fill="hsl(210,40%,45%)"/>
+            </svg>
+          </div>
+          <div class="photo-card__info">
+            <h4>Boise Foothills Family</h4>
+            <span>Portrait</span>
+          </div>
+        </div>
+        <div class="photo-card scroll-reveal" data-category="wedding" data-delay="200">
+          <div class="photo-card__img" style="--h:350;--s:40%;--l:75%">
+            <div class="photo-card__overlay">
+              <span>Wedding, Sun Valley</span>
+            </div>
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+              <rect width="400" height="300" fill="hsl(350,40%,90%)"/>
+              <circle cx="340" cy="60" rx="45" ry="45" fill="hsl(45,80%,80%)" opacity="0.6"/>
+              <path d="M0 220 Q200 180 400 220 L400 300 L0 300 Z" fill="hsl(120,30%,70%)" opacity="0.5"/>
+              <ellipse cx="130" cy="200" rx="25" ry="70" fill="hsl(350,20%,85%)"/>
+              <ellipse cx="190" cy="200" rx="20" ry="70" fill="hsl(0,0%,30%)"/>
+              <circle cx="130" cy="120" r="30" fill="hsl(30,50%,75%)"/>
+              <circle cx="190" cy="120" r="28" fill="hsl(25,45%,65%)"/>
+            </svg>
+          </div>
+          <div class="photo-card__info">
+            <h4>Sun Valley Wedding</h4>
+            <span>Wedding</span>
+          </div>
+        </div>
+        <div class="photo-card scroll-reveal" data-category="landscape" data-delay="150">
+          <div class="photo-card__img" style="--h:195;--s:60%;--l:40%">
+            <div class="photo-card__overlay">
+              <span>Craters of the Moon, Sunrise</span>
+            </div>
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+              <rect width="400" height="300" fill="hsl(195,60%,55%)"/>
+              <rect y="180" width="400" height="120" fill="hsl(0,0%,18%)"/>
+              <path d="M0 180 Q50 160 100 175 Q150 155 200 170 Q250 150 300 168 Q350 148 400 165 L400 180 L0 180Z" fill="hsl(0,0%,12%)"/>
+              <ellipse cx="200" cy="180" rx="350" ry="30" fill="hsl(25,80%,55%)" opacity="0.5"/>
+              <circle cx="200" cy="100" rx="55" ry="55" fill="hsl(45,95%,65%)" opacity="0.95"/>
+            </svg>
+          </div>
+          <div class="photo-card__info">
+            <h4>Craters of the Moon</h4>
+            <span>Landscape</span>
+          </div>
+        </div>
+        <div class="photo-card scroll-reveal photo-card--tall" data-category="portrait" data-delay="250">
+          <div class="photo-card__img" style="--h:120;--s:30%;--l:65%">
+            <div class="photo-card__overlay">
+              <span>Senior Portrait, Coeur d'Alene</span>
+            </div>
+            <svg viewBox="0 0 300 450" xmlns="http://www.w3.org/2000/svg">
+              <rect width="300" height="450" fill="hsl(200,50%,75%)"/>
+              <path d="M0 300 Q150 270 300 300 L300 450 L0 450 Z" fill="hsl(200,40%,55%)" opacity="0.7"/>
+              <circle cx="150" cy="140" r="60" fill="hsl(30,45%,70%)"/>
+              <path d="M50 450 L50 310 Q50 265 100 250 L150 240 L200 250 Q250 265 250 310 L250 450Z" fill="hsl(0,0%,25%)"/>
+            </svg>
+          </div>
+          <div class="photo-card__info">
+            <h4>Coeur d'Alene Senior</h4>
+            <span>Portrait</span>
+          </div>
+        </div>
+        <div class="photo-card scroll-reveal" data-category="wedding" data-delay="300">
+          <div class="photo-card__img" style="--h:15;--s:50%;--l:80%">
+            <div class="photo-card__overlay">
+              <span>Barn Wedding, Twin Falls</span>
+            </div>
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+              <rect width="400" height="300" fill="hsl(15,50%,85%)"/>
+              <rect x="100" y="80" width="200" height="180" fill="hsl(15,40%,55%)"/>
+              <polygon points="80,80 200,20 320,80" fill="hsl(15,35%,45%)"/>
+              <rect x="160" y="180" width="80" height="80" fill="hsl(25,30%,35%)"/>
+              <rect x="110" y="110" width="50" height="50" fill="hsl(45,60%,75%)" opacity="0.7"/>
+              <rect x="240" y="110" width="50" height="50" fill="hsl(45,60%,75%)" opacity="0.7"/>
+              <path d="M0 260 Q200 240 400 260 L400 300 L0 300Z" fill="hsl(90,40%,50%)" opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="photo-card__info">
+            <h4>Twin Falls Barn Wedding</h4>
+            <span>Wedding</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <article class="project-card scroll-reveal" data-delay="0">
-          <div class="project-card__visual" style="--hue: 250">
-            <div class="project-card__shapes">
-              <div class="shape shape--circle"></div>
-              <div class="shape shape--rect"></div>
-              <div class="shape shape--triangle"></div>
-            </div>
-            <span class="project-card__number">01</span>
-          </div>
-          <div class="project-card__info">
-            <div class="project-card__tags">
-              <span>React</span><span>Node.js</span><span>PostgreSQL</span>
-            </div>
-            <h3>Nexus Dashboard</h3>
-            <p>An analytics platform with real-time data visualization, custom charts, and team collaboration features for SaaS businesses.</p>
-            <div class="project-card__links">
-              <a href="#" class="link-arrow">Live Demo →</a>
-              <a href="#" class="link-arrow">GitHub →</a>
+  <!-- Testimonials -->
+  <section class="testimonials section" id="testimonials">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag scroll-reveal">04 / Testimonials</span>
+        <h2 class="section__title scroll-reveal">Kind Words</h2>
+      </div>
+      <div class="testimonials__grid">
+        <div class="testimonial-card scroll-reveal" data-delay="0">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p>"Dave has an incredible eye for light and emotion. Our wedding photos are beyond anything we could have dreamed of. We'll treasure them forever."</p>
+          <div class="testimonial-card__author">
+            <div class="author-avatar" style="background: hsl(350,60%,75%)">SR</div>
+            <div>
+              <strong>Sarah & Ryan Mitchell</strong>
+              <span>Sun Valley Wedding, 2023</span>
             </div>
           </div>
-        </article>
-
-        <article class="project-card scroll-reveal" data-delay="150">
-          <div class="project-card__visual" style="--hue: 160">
-            <div class="project-card__shapes">
-              <div class="shape shape--ring"></div>
-              <div class="shape shape--dot"></div>
-              <div class="shape shape--line"></div>
-            </div>
-            <span class="project-card__number">02</span>
-          </div>
-          <div class="project-card__info">
-            <div class="project-card__tags">
-              <span>Next.js</span><span>Figma</span><span>Framer</span>
-            </div>
-            <h3>Bloom Design System</h3>
-            <p>A comprehensive design system with 200+ components, dark/light themes, full documentation, and Figma integration.</p>
-            <div class="project-card__links">
-              <a href="#" class="link-arrow">Live Demo →</a>
-              <a href="#" class="link-arrow">GitHub →</a>
+        </div>
+        <div class="testimonial-card scroll-reveal" data-delay="150">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p>"We've booked Dave three years in a row for our family portraits. He's so patient with our kids and always finds the most stunning locations. Highly recommend!"</p>
+          <div class="testimonial-card__author">
+            <div class="author-avatar" style="background: hsl(200,60%,65%)">JT</div>
+            <div>
+              <strong>Jennifer Thorne</strong>
+              <span>Family Portrait, Boise</span>
             </div>
           </div>
-        </article>
-
-        <article class="project-card scroll-reveal" data-delay="300">
-          <div class="project-card__visual" style="--hue: 30">
-            <div class="project-card__shapes">
-              <div class="shape shape--square"></div>
-              <div class="shape shape--circle-sm"></div>
-              <div class="shape shape--cross"></div>
-            </div>
-            <span class="project-card__number">03</span>
-          </div>
-          <div class="project-card__info">
-            <div class="project-card__tags">
-              <span>Python</span><span>OpenAI</span><span>FastAPI</span>
-            </div>
-            <h3>Aria AI Assistant</h3>
-            <p>An intelligent writing assistant with context awareness, multi-document support, and team knowledge base integration.</p>
-            <div class="project-card__links">
-              <a href="#" class="link-arrow">Live Demo →</a>
-              <a href="#" class="link-arrow">GitHub →</a>
+        </div>
+        <div class="testimonial-card scroll-reveal" data-delay="300">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p>"Dave's landscape prints in our office lobby are the first thing every client comments on. Stunning, professional, and he made the whole process effortless."</p>
+          <div class="testimonial-card__author">
+            <div class="author-avatar" style="background: hsl(150,50%,55%)">MK</div>
+            <div>
+              <strong>Marcus Klein</strong>
+              <span>Commercial Client, Idaho Falls</span>
             </div>
           </div>
-        </article>
-
+        </div>
       </div>
     </div>
   </section>
@@ -227,46 +420,66 @@
   <section class="contact section" id="contact">
     <div class="container">
       <div class="section__header">
-        <span class="section__tag scroll-reveal">04 / Contact</span>
-        <h2 class="section__title scroll-reveal">Let's Talk</h2>
+        <span class="section__tag scroll-reveal">05 / Contact</span>
+        <h2 class="section__title scroll-reveal">Let's Create Together</h2>
       </div>
       <div class="contact__wrapper">
         <div class="contact__info scroll-reveal">
-          <p>Have a project in mind or just want to say hello? I'd love to hear from you. I'm currently available for freelance work and full-time opportunities.</p>
+          <p>Ready to book a session or have questions? I'd love to hear about your project. I typically respond within 24 hours.</p>
           <ul class="contact__list">
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              <span>trent@example.com</span>
+              <span>dave@beeples.photography</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>(208) 555-0192</span>
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              <span>San Francisco, CA</span>
+              <span>Boise, Idaho — Available Statewide</span>
             </li>
           </ul>
           <div class="contact__social">
-            <a href="#" class="social-btn" title="GitHub">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            <a href="#" class="social-btn" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
             </a>
-            <a href="#" class="social-btn" title="LinkedIn">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <a href="#" class="social-btn" title="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </a>
-            <a href="#" class="social-btn" title="Twitter">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+            <a href="#" class="social-btn" title="500px">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.17 4.88C4.94 4.88 3 6.79 3 9.03s1.94 4.15 4.17 4.15 4.17-1.9 4.17-4.15-1.93-4.15-4.17-4.15zM7.17 11.5C5.6 11.5 4.33 10.22 4.33 9.03S5.6 6.55 7.17 6.55s2.84 1.28 2.84 2.48-1.27 2.47-2.84 2.47zM2 14.42h2v4.7H2zM6 12.96h2v6.16H6zM10 11.5h2v7.62h-2zM14 9.62h2v9.5h-2zM18 7.5h2v11.62h-2z"/></svg>
             </a>
           </div>
         </div>
         <form class="contact__form scroll-reveal" id="contactForm">
-          <div class="form-group">
-            <input type="text" id="name" placeholder=" " required />
-            <label for="name">Your Name</label>
+          <div class="form-row">
+            <div class="form-group">
+              <input type="text" id="name" placeholder=" " required />
+              <label for="name">Your Name</label>
+            </div>
+            <div class="form-group">
+              <input type="email" id="email" placeholder=" " required />
+              <label for="email">Email Address</label>
+            </div>
           </div>
           <div class="form-group">
-            <input type="email" id="email" placeholder=" " required />
-            <label for="email">Email Address</label>
+            <select id="service" required>
+              <option value="" disabled selected>Select a Service</option>
+              <option>Wedding & Engagement</option>
+              <option>Family Portrait</option>
+              <option>Landscape / Fine Art Print</option>
+              <option>Commercial & Branding</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input type="text" id="date" placeholder=" " />
+            <label for="date">Preferred Date (if applicable)</label>
           </div>
           <div class="form-group">
             <textarea id="message" rows="5" placeholder=" " required></textarea>
-            <label for="message">Your Message</label>
+            <label for="message">Tell Me About Your Vision</label>
           </div>
           <button type="submit" class="btn btn--primary btn--full">
             <span>Send Message</span>
@@ -280,8 +493,10 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <p>Designed & Built by <strong>Mr. Trent Frent</strong> · 2024</p>
-      <p class="footer__sub">Made with passion and a lot of coffee ☕</p>
+      <div class="footer__logo">DB</div>
+      <p>Photography by <strong>Dave Beeples</strong> · Boise, Idaho</p>
+      <p class="footer__sub">© 2024 Dave Beeples Photography · All rights reserved</p>
+      <p class="footer__sub" style="margin-top:4px">Made with ❤️ and golden-hour light</p>
     </div>
   </footer>
 
