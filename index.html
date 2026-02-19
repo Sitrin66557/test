@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alex Morgan — Developer & Designer</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav__logo">AM</div>
+    <ul class="nav__links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav__burger" id="burger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero__bg">
+      <canvas id="particles"></canvas>
+    </div>
+    <div class="hero__content">
+      <p class="hero__greeting reveal-fade">Hello, I'm</p>
+      <h1 class="hero__name">
+        <span class="reveal-slide">Alex</span>
+        <span class="reveal-slide delay-1">Morgan</span>
+      </h1>
+      <div class="hero__roles">
+        <span class="role-text" id="roleText"></span><span class="cursor">|</span>
+      </div>
+      <p class="hero__desc reveal-fade delay-2">
+        I craft elegant digital experiences that live at the intersection of design and technology.
+      </p>
+      <div class="hero__cta reveal-fade delay-3">
+        <a href="#projects" class="btn btn--primary">View My Work</a>
+        <a href="#contact" class="btn btn--outline">Get In Touch</a>
+      </div>
+    </div>
+    <div class="hero__scroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about section" id="about">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag scroll-reveal">01 / About</span>
+        <h2 class="section__title scroll-reveal">Who I Am</h2>
+      </div>
+      <div class="about__grid">
+        <div class="about__image scroll-reveal">
+          <div class="about__img-wrapper">
+            <div class="about__img-placeholder">
+              <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="75" r="45" fill="#6366f1" opacity="0.8"/>
+                <ellipse cx="100" cy="175" rx="70" ry="50" fill="#6366f1" opacity="0.8"/>
+              </svg>
+            </div>
+            <div class="about__img-deco"></div>
+          </div>
+        </div>
+        <div class="about__text">
+          <p class="scroll-reveal">
+            I'm a full-stack developer and UI/UX designer based in San Francisco with a passion for building
+            products that make a difference. I love the challenge of turning complex problems into simple,
+            beautiful solutions.
+          </p>
+          <p class="scroll-reveal">
+            When I'm not coding, you'll find me hiking trails, experimenting with photography, or reading
+            about the latest advancements in AI and design systems.
+          </p>
+          <div class="about__stats scroll-reveal">
+            <div class="stat">
+              <span class="stat__number" data-target="5">0</span><span>+</span>
+              <span class="stat__label">Years Experience</span>
+            </div>
+            <div class="stat">
+              <span class="stat__number" data-target="40">0</span><span>+</span>
+              <span class="stat__label">Projects Completed</span>
+            </div>
+            <div class="stat">
+              <span class="stat__number" data-target="20">0</span><span>+</span>
+              <span class="stat__label">Happy Clients</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="skills section" id="skills">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag scroll-reveal">02 / Skills</span>
+        <h2 class="section__title scroll-reveal">What I Do</h2>
+      </div>
+      <div class="skills__grid">
+        <div class="skill-card scroll-reveal" data-delay="0">
+          <div class="skill-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3>Frontend Dev</h3>
+          <p>React, Vue, TypeScript, Next.js, animations & pixel-perfect UI implementation.</p>
+          <div class="skill-bar"><div class="skill-bar__fill" data-width="92"></div></div>
+        </div>
+        <div class="skill-card scroll-reveal" data-delay="100">
+          <div class="skill-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3>UI/UX Design</h3>
+          <p>Figma, design systems, prototyping, user research, and accessibility-first thinking.</p>
+          <div class="skill-bar"><div class="skill-bar__fill" data-width="85"></div></div>
+        </div>
+        <div class="skill-card scroll-reveal" data-delay="200">
+          <div class="skill-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <h3>Backend Dev</h3>
+          <p>Node.js, Python, PostgreSQL, REST APIs, GraphQL, and cloud infrastructure.</p>
+          <div class="skill-bar"><div class="skill-bar__fill" data-width="78"></div></div>
+        </div>
+        <div class="skill-card scroll-reveal" data-delay="300">
+          <div class="skill-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>DevOps & Cloud</h3>
+          <p>Docker, Kubernetes, CI/CD pipelines, AWS, Vercel, and monitoring solutions.</p>
+          <div class="skill-bar"><div class="skill-bar__fill" data-width="70"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="projects section" id="projects">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag scroll-reveal">03 / Projects</span>
+        <h2 class="section__title scroll-reveal">Recent Work</h2>
+      </div>
+      <div class="projects__grid">
+
+        <article class="project-card scroll-reveal" data-delay="0">
+          <div class="project-card__visual" style="--hue: 250">
+            <div class="project-card__shapes">
+              <div class="shape shape--circle"></div>
+              <div class="shape shape--rect"></div>
+              <div class="shape shape--triangle"></div>
+            </div>
+            <span class="project-card__number">01</span>
+          </div>
+          <div class="project-card__info">
+            <div class="project-card__tags">
+              <span>React</span><span>Node.js</span><span>PostgreSQL</span>
+            </div>
+            <h3>Nexus Dashboard</h3>
+            <p>An analytics platform with real-time data visualization, custom charts, and team collaboration features for SaaS businesses.</p>
+            <div class="project-card__links">
+              <a href="#" class="link-arrow">Live Demo →</a>
+              <a href="#" class="link-arrow">GitHub →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card scroll-reveal" data-delay="150">
+          <div class="project-card__visual" style="--hue: 160">
+            <div class="project-card__shapes">
+              <div class="shape shape--ring"></div>
+              <div class="shape shape--dot"></div>
+              <div class="shape shape--line"></div>
+            </div>
+            <span class="project-card__number">02</span>
+          </div>
+          <div class="project-card__info">
+            <div class="project-card__tags">
+              <span>Next.js</span><span>Figma</span><span>Framer</span>
+            </div>
+            <h3>Bloom Design System</h3>
+            <p>A comprehensive design system with 200+ components, dark/light themes, full documentation, and Figma integration.</p>
+            <div class="project-card__links">
+              <a href="#" class="link-arrow">Live Demo →</a>
+              <a href="#" class="link-arrow">GitHub →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card scroll-reveal" data-delay="300">
+          <div class="project-card__visual" style="--hue: 30">
+            <div class="project-card__shapes">
+              <div class="shape shape--square"></div>
+              <div class="shape shape--circle-sm"></div>
+              <div class="shape shape--cross"></div>
+            </div>
+            <span class="project-card__number">03</span>
+          </div>
+          <div class="project-card__info">
+            <div class="project-card__tags">
+              <span>Python</span><span>OpenAI</span><span>FastAPI</span>
+            </div>
+            <h3>Aria AI Assistant</h3>
+            <p>An intelligent writing assistant with context awareness, multi-document support, and team knowledge base integration.</p>
+            <div class="project-card__links">
+              <a href="#" class="link-arrow">Live Demo →</a>
+              <a href="#" class="link-arrow">GitHub →</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact section" id="contact">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag scroll-reveal">04 / Contact</span>
+        <h2 class="section__title scroll-reveal">Let's Talk</h2>
+      </div>
+      <div class="contact__wrapper">
+        <div class="contact__info scroll-reveal">
+          <p>Have a project in mind or just want to say hello? I'd love to hear from you. I'm currently available for freelance work and full-time opportunities.</p>
+          <ul class="contact__list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <span>alex@example.com</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>San Francisco, CA</span>
+            </li>
+          </ul>
+          <div class="contact__social">
+            <a href="#" class="social-btn" title="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+            <a href="#" class="social-btn" title="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="#" class="social-btn" title="Twitter">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+            </a>
+          </div>
+        </div>
+        <form class="contact__form scroll-reveal" id="contactForm">
+          <div class="form-group">
+            <input type="text" id="name" placeholder=" " required />
+            <label for="name">Your Name</label>
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" placeholder=" " required />
+            <label for="email">Email Address</label>
+          </div>
+          <div class="form-group">
+            <textarea id="message" rows="5" placeholder=" " required></textarea>
+            <label for="message">Your Message</label>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full">
+            <span>Send Message</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>Designed & Built by <strong>Alex Morgan</strong> · 2024</p>
+      <p class="footer__sub">Made with passion and a lot of coffee ☕</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
