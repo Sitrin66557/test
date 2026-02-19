@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mona Lisa</title>
+  <style>
+    body {
+      background: #1a1008;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: Georgia, serif;
+    }
+    h1 {
+      color: #c8a850;
+      font-style: italic;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+      font-size: 1.4rem;
+    }
+    .frame {
+      padding: 20px;
+      background: linear-gradient(135deg, #7a5510 0%, #c8920a 30%, #8a6520 50%, #c8920a 70%, #7a5510 100%);
+      border-radius: 4px;
+      box-shadow: 0 0 40px rgba(0,0,0,0.9), inset 0 0 12px rgba(0,0,0,0.5);
+    }
+  </style>
+</head>
+<body>
+  <h1>La Gioconda — Leonardo da Vinci, c. 1503–1519</h1>
+  <div class="frame">
+    <svg width="400" height="570" viewBox="0 0 400 570"
+         xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Sky gradient -->
+        <linearGradient id="skyL" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#7da8c0"/>
+          <stop offset="60%" stop-color="#a8c8d8"/>
+          <stop offset="100%" stop-color="#b8d0d8"/>
+        </linearGradient>
+        <!-- Face gradient: warm sfumato tones -->
+        <radialGradient id="faceG" cx="48%" cy="38%" r="55%">
+          <stop offset="0%"   stop-color="#d8b888"/>
+          <stop offset="55%"  stop-color="#c8a068"/>
+          <stop offset="100%" stop-color="#a87848"/>
+        </radialGradient>
+        <!-- Neck gradient -->
+        <radialGradient id="neckG" cx="50%" cy="30%" r="60%">
+          <stop offset="0%"   stop-color="#d0a870"/>
+          <stop offset="100%" stop-color="#a87848"/>
+        </radialGradient>
+        <!-- Hand gradient -->
+        <radialGradient id="handG" cx="50%" cy="40%" r="60%">
+          <stop offset="0%"   stop-color="#c8a068"/>
+          <stop offset="100%" stop-color="#a07040"/>
+        </radialGradient>
+        <!-- Dress gradient -->
+        <linearGradient id="dressG" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stop-color="#080602"/>
+          <stop offset="30%"  stop-color="#1e1808"/>
+          <stop offset="50%"  stop-color="#2a2010"/>
+          <stop offset="70%"  stop-color="#1e1808"/>
+          <stop offset="100%" stop-color="#080602"/>
+        </linearGradient>
+        <!-- Left landscape gradient -->
+        <linearGradient id="lLandG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#6888a0"/>
+          <stop offset="40%"  stop-color="#5a7858"/>
+          <stop offset="100%" stop-color="#3a5838"/>
+        </linearGradient>
+        <!-- Right landscape gradient -->
+        <linearGradient id="rLandG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#7898b0"/>
+          <stop offset="40%"  stop-color="#607860"/>
+          <stop offset="100%" stop-color="#406040"/>
+        </linearGradient>
+        <!-- Water -->
+        <linearGradient id="waterG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#8aaac0"/>
+          <stop offset="100%" stop-color="#6888a8"/>
+        </linearGradient>
+        <!-- Vignette -->
+        <radialGradient id="vigG" cx="50%" cy="50%" r="70%">
+          <stop offset="0%"   stop-color="transparent"/>
+          <stop offset="100%" stop-color="#000000" stop-opacity="0.55"/>
+        </radialGradient>
+        <!-- Soft glow for sfumato -->
+        <filter id="sfum" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="2.2"/>
+        </filter>
+        <filter id="softBlur" x="-10%" y="-10%" width="120%" height="120%">
+          <feGaussianBlur stdDeviation="1.2"/>
+        </filter>
+        <filter id="veryBlur">
+          <feGaussianBlur stdDeviation="3.5"/>
+        </filter>
+      </defs>
+
+      <!-- ============================================================ -->
+      <!-- OVERALL DARK BACKGROUND                                       -->
+      <!-- ============================================================ -->
+      <rect width="400" height="570" fill="#1a1208"/>
+
+      <!-- ============================================================ -->
+      <!-- BACKGROUND LANDSCAPE                                          -->
+      <!-- ============================================================ -->
+      <!-- Sky visible between columns -->
+      <rect x="68" y="0" width="264" height="220" fill="url(#skyL)"/>
+
+      <!-- Left background: distant mountains and water -->
+      <g clip-path="url(#leftClip)">
+        <path d="M68,220 L68,30 Q88,40 98,60 Q106,75 115,65
+                 Q128,48 138,58 Q150,70 160,50 Q168,35 175,45
+                 L185,90 L185,220 Z"
+              fill="url(#lLandG)" opacity="0.88"/>
+        <!-- Foreground hills left -->
+        <path d="M68,220 Q90,195 110,198 Q130,200 145,190
+                 Q160,182 175,188 L185,220 Z"
+              fill="#3a5838" opacity="0.9"/>
+        <!-- Water / lake left -->
+        <path d="M68,165 Q90,158 110,162 Q130,165 150,158
+                 Q165,153 175,158 L185,175 L185,188 L68,188 Z"
+              fill="url(#waterG)" opacity="0.55"/>
+        <!-- Winding road left -->
+        <path d="M80,220 Q92,205 96,190 Q100,175 92,162
+                 Q88,152 94,140"
+              stroke="#8a9a78" stroke-width="2.5" fill="none" opacity="0.45"/>
+      </g>
+
+      <!-- Right background: distant mountains, bridge, water -->
+      <g clip-path="url(#rightClip)">
+        <path d="M215,220 L215,42 Q225,28 238,45 Q248,58 258,42
+                 Q268,26 280,38 Q290,50 302,35 Q314,20 322,32
+                 Q330,42 332,60 L332,220 Z"
+              fill="url(#rLandG)" opacity="0.88"/>
+        <!-- Foreground hills right -->
+        <path d="M215,220 Q230,192 248,195 Q265,198 280,188
+                 Q298,178 315,185 Q324,188 332,195 L332,220 Z"
+              fill="#406040" opacity="0.9"/>
+        <!-- Water / lake right -->
+        <path d="M215,162 Q235,155 255,160 Q275,164 298,155
+                 Q312,149 332,155 L332,188 L215,188 Z"
+              fill="url(#waterG)" opacity="0.55"/>
+        <!-- Bridge suggestion right -->
+        <path d="M242,175 Q252,165 264,168 Q275,170 286,162"
+              stroke="#6a8878" stroke-width="2" fill="none" opacity="0.6"/>
+        <!-- Winding road right -->
+        <path d="M322,220 Q314,200 318,185 Q322,168 314,152
+                 Q308,140 316,128"
+              stroke="#8a9a78" stroke-width="2.5" fill="none" opacity="0.4"/>
+      </g>
+
+      <!-- Clip paths for background panels -->
+      <defs>
+        <clipPath id="leftClip">
+          <rect x="68" y="0" width="117" height="230"/>
+        </clipPath>
+        <clipPath id="rightClip">
+          <rect x="215" y="0" width="117" height="230"/>
+        </clipPath>
+      </defs>
+
+      <!-- ============================================================ -->
+      <!-- ARCHITECTURAL PILASTERS (dark columns on sides)              -->
+      <!-- ============================================================ -->
+      <!-- Left pilaster -->
+      <rect x="0" y="0" width="72" height="570" fill="#1e1608"/>
+      <rect x="62" y="0" width="8" height="570" fill="#2a2010"/>
+      <rect x="0" y="0" width="72" height="14" fill="#2e2412"/>
+      <rect x="0" y="556" width="72" height="14" fill="#2e2412"/>
+
+      <!-- Right pilaster -->
+      <rect x="328" y="0" width="72" height="570" fill="#1e1608"/>
+      <rect x="328" y="0" width="8" height="570" fill="#2a2010"/>
+      <rect x="328" y="0" width="72" height="14" fill="#2e2412"/>
+      <rect x="328" y="556" width="72" height="14" fill="#2e2412"/>
+
+      <!-- ============================================================ -->
+      <!-- BALUSTRADE / LEDGE (foreground low wall)                     -->
+      <!-- ============================================================ -->
+      <rect x="0" y="478" width="400" height="92" fill="#201a08"/>
+      <rect x="0" y="476" width="400" height="6" fill="#302810"/>
+      <!-- Balustrade top edge highlight -->
+      <rect x="0" y="474" width="400" height="3" fill="#3a3018" opacity="0.6"/>
+
+      <!-- ============================================================ -->
+      <!-- LISA'S BODY / DRESS                                          -->
+      <!-- ============================================================ -->
+      <!-- Main dress body -->
+      <path d="M82,570 L95,430 Q100,390 115,360
+               Q130,330 148,315 Q165,302 185,295
+               Q192,292 200,291 Q208,292 215,295
+               Q235,302 252,315 Q270,330 285,360
+               Q300,390 305,430 L318,570 Z"
+            fill="url(#dressG)"/>
+
+      <!-- Dress fold lines (subtle fabric detail) -->
+      <path d="M155,570 Q150,490 152,430 Q154,390 160,360 Q168,335 178,315"
+            stroke="#2e2410" stroke-width="1.8" fill="none" opacity="0.7"/>
+      <path d="M180,570 Q176,490 178,440 Q180,405 184,380 Q188,355 192,330"
+            stroke="#2e2410" stroke-width="1.2" fill="none" opacity="0.5"/>
+      <path d="M245,570 Q250,490 248,430 Q246,390 240,360 Q232,335 222,315"
+            stroke="#2e2410" stroke-width="1.8" fill="none" opacity="0.7"/>
+      <path d="M220,570 Q224,490 222,440 Q220,405 216,380 Q212,355 208,330"
+            stroke="#2e2410" stroke-width="1.2" fill="none" opacity="0.5"/>
+
+      <!-- Dress neckline / bodice -->
+      <path d="M175,302 Q185,290 200,287 Q215,290 225,302
+               Q215,312 200,315 Q185,312 175,302 Z"
+            fill="#181208"/>
+
+      <!-- White chemise / collar at neckline -->
+      <path d="M176,303 Q185,294 200,291 Q215,294 224,303
+               Q218,310 208,314 Q204,316 200,316 Q196,316 192,314 Q182,310 176,303 Z"
+            fill="#c8b898" opacity="0.55"/>
+      <!-- Chemise fold highlight -->
+      <path d="M196,292 Q198,298 200,302 Q202,298 204,292"
+            stroke="#d8c8a8" stroke-width="1" fill="none" opacity="0.4"/>
+
+      <!-- Sleeve left (dark with subtle fold) -->
+      <path d="M95,440 Q90,400 100,365 Q110,338 128,318
+               Q138,308 148,302 Q140,320 135,345
+               Q128,375 125,410 Q122,440 122,480"
+            fill="#120e04" opacity="0.9"/>
+      <!-- Sleeve right -->
+      <path d="M305,440 Q310,400 300,365 Q290,338 272,318
+               Q262,308 252,302 Q260,320 265,345
+               Q272,375 275,410 Q278,440 278,480"
+            fill="#120e04" opacity="0.9"/>
+
+      <!-- ============================================================ -->
+      <!-- NECK                                                         -->
+      <!-- ============================================================ -->
+      <path d="M187,295 Q190,272 196,262 Q198,258 200,257
+               Q202,258 204,262 Q210,272 213,295
+               Q207,290 200,289 Q193,290 187,295 Z"
+            fill="url(#neckG)"/>
+      <!-- Neck shadow -->
+      <path d="M187,295 Q189,280 192,268" stroke="#9a7850" stroke-width="1" fill="none" opacity="0.3"/>
+      <path d="M213,295 Q211,280 208,268" stroke="#9a7850" stroke-width="1" fill="none" opacity="0.3"/>
+
+      <!-- ============================================================ -->
+      <!-- HAIR (dark, parted in middle, flowing past shoulders)        -->
+      <!-- ============================================================ -->
+      <!-- Overall hair mass / head silhouette -->
+      <ellipse cx="200" cy="210" rx="75" ry="90" fill="#0a0704"/>
+
+      <!-- Left flowing hair -->
+      <path d="M140,205 Q128,240 126,275 Q124,305 128,335
+               Q133,360 140,375 Q148,390 155,380
+               Q148,360 147,335 Q145,305 147,275
+               Q149,248 152,220 Z"
+            fill="#0a0704"/>
+      <!-- Left hair highlight (very subtle) -->
+      <path d="M140,205 Q132,235 131,265 Q130,290 133,315"
+            stroke="#1e1408" stroke-width="3" fill="none" opacity="0.6"/>
+
+      <!-- Right flowing hair -->
+      <path d="M260,205 Q272,240 274,275 Q276,305 272,335
+               Q267,360 260,375 Q252,390 245,380
+               Q252,360 253,335 Q255,305 253,275
+               Q251,248 248,220 Z"
+            fill="#0a0704"/>
+      <!-- Right hair highlight -->
+      <path d="M260,205 Q268,235 269,265 Q270,290 267,315"
+            stroke="#1e1408" stroke-width="3" fill="none" opacity="0.6"/>
+
+      <!-- Veil (very fine, translucent over hair) -->
+      <path d="M138,155 Q145,120 160,100 Q175,82 200,78
+               Q225,82 240,100 Q255,120 262,155"
+            stroke="#a09070" stroke-width="1.2" fill="none" opacity="0.3"/>
+      <path d="M142,175 Q148,140 162,118 Q178,95 200,90
+               Q222,95 238,118 Q252,140 258,175"
+            stroke="#a09070" stroke-width="0.8" fill="none" opacity="0.2"/>
+
+      <!-- ============================================================ -->
+      <!-- FACE                                                         -->
+      <!-- ============================================================ -->
+      <!-- Face shape -->
+      <path d="M164,185 Q163,160 167,142 Q174,118 185,105
+               Q192,97 200,95 Q208,97 215,105
+               Q226,118 233,142 Q237,160 236,185
+               Q238,210 235,230 Q228,255 218,263
+               Q210,269 200,270 Q190,269 182,263
+               Q172,255 165,230 Q162,210 164,185 Z"
+            fill="url(#faceG)"/>
+
+      <!-- Forehead — hair darkens the top edge (sfumato) -->
+      <path d="M164,185 Q165,165 170,148 Q178,125 190,110
+               Q195,104 200,102 Q205,104 210,110
+               Q222,125 230,148 Q235,165 236,185
+               Q225,168 215,160 Q208,156 200,155
+               Q192,156 185,160 Q175,168 164,185 Z"
+            fill="#0a0704" opacity="0.5"/>
+
+      <!-- Cheek blush / warm sfumato shadows -->
+      <ellipse cx="176" cy="222" rx="14" ry="11" fill="#c09060" opacity="0.18" filter="url(#sfum)"/>
+      <ellipse cx="224" cy="222" rx="14" ry="11" fill="#c09060" opacity="0.18" filter="url(#sfum)"/>
+
+      <!-- Under-chin shadow -->
+      <path d="M185,260 Q200,268 215,260 Q210,270 200,272 Q190,270 185,260 Z"
+            fill="#7a5030" opacity="0.3" filter="url(#softBlur)"/>
+
+      <!-- ============================================================ -->
+      <!-- EYES                                                         -->
+      <!-- ============================================================ -->
+      <!-- No eyebrows (historically accurate — they faded / were shaved) -->
+
+      <!-- Left eye socket shadow -->
+      <ellipse cx="184" cy="194" rx="14" ry="9" fill="#9a7040" opacity="0.22" filter="url(#sfum)"/>
+      <!-- Right eye socket shadow -->
+      <ellipse cx="216" cy="194" rx="14" ry="9" fill="#9a7040" opacity="0.22" filter="url(#sfum)"/>
+
+      <!-- Left eyelid / eye shape -->
+      <path d="M173,194 Q178,188 184,187 Q190,186 196,190
+               Q191,197 184,198 Q177,197 173,194 Z"
+            fill="#1a0e06"/>
+      <!-- Left iris -->
+      <ellipse cx="184" cy="193" rx="5.5" ry="5" fill="#3a2612"/>
+      <!-- Left pupil -->
+      <ellipse cx="184" cy="193" rx="3" ry="3" fill="#0e0806"/>
+      <!-- Left eye highlight -->
+      <ellipse cx="185.5" cy="191.5" rx="1.2" ry="1" fill="#ffffff" opacity="0.55"/>
+      <!-- Left lower lid -->
+      <path d="M173,194 Q178,199 184,200 Q190,199 196,194"
+            stroke="#b08860" stroke-width="0.8" fill="none" opacity="0.5"/>
+      <!-- Left upper lashes -->
+      <path d="M173,194 Q178,188 184,187 Q190,186 196,190"
+            stroke="#0a0604" stroke-width="1.5" fill="none"/>
+
+      <!-- Right eye shape -->
+      <path d="M204,190 Q210,186 216,187 Q222,188 227,194
+               Q222,197 216,198 Q209,197 204,190 Z"
+            fill="#1a0e06"/>
+      <!-- Right iris -->
+      <ellipse cx="216" cy="193" rx="5.5" ry="5" fill="#3a2612"/>
+      <!-- Right pupil -->
+      <ellipse cx="216" cy="193" rx="3" ry="3" fill="#0e0806"/>
+      <!-- Right eye highlight -->
+      <ellipse cx="217.5" cy="191.5" rx="1.2" ry="1" fill="#ffffff" opacity="0.55"/>
+      <!-- Right lower lid -->
+      <path d="M204,190 Q210,197 216,198 Q222,197 227,194"
+            stroke="#b08860" stroke-width="0.8" fill="none" opacity="0.5"/>
+      <!-- Right upper lashes -->
+      <path d="M204,190 Q210,186 216,187 Q222,188 227,194"
+            stroke="#0a0604" stroke-width="1.5" fill="none"/>
+
+      <!-- Subtle eyelid crease left -->
+      <path d="M175,192 Q181,185 188,186" stroke="#8a6040" stroke-width="0.6" fill="none" opacity="0.35"/>
+      <!-- Subtle eyelid crease right -->
+      <path d="M212,186 Q219,185 225,192" stroke="#8a6040" stroke-width="0.6" fill="none" opacity="0.35"/>
+
+      <!-- ============================================================ -->
+      <!-- NOSE                                                         -->
+      <!-- ============================================================ -->
+      <!-- Nose bridge (very soft sfumato — barely visible) -->
+      <path d="M198,200 Q196,212 193,220 Q190,226 188,230"
+            stroke="#9a7048" stroke-width="1.2" fill="none" opacity="0.28"/>
+      <path d="M202,200 Q204,212 207,220 Q210,226 212,230"
+            stroke="#9a7048" stroke-width="1.2" fill="none" opacity="0.28"/>
+
+      <!-- Nose tip and nostrils -->
+      <path d="M188,229 Q193,234 200,235 Q207,234 212,229
+               Q207,226 200,226 Q193,226 188,229 Z"
+            fill="#b08060" opacity="0.38" filter="url(#softBlur)"/>
+      <!-- Left nostril -->
+      <path d="M186,230 Q188,228 191,228 Q190,232 187,232 Z"
+            fill="#8a5830" opacity="0.45"/>
+      <!-- Right nostril -->
+      <path d="M214,230 Q212,228 209,228 Q210,232 213,232 Z"
+            fill="#8a5830" opacity="0.45"/>
+
+      <!-- ============================================================ -->
+      <!-- MOUTH — The Famous Enigmatic Smile                           -->
+      <!-- ============================================================ -->
+      <!-- Upper lip -->
+      <path d="M186,243 Q191,238 196,237 Q200,236 204,237
+               Q209,238 214,243
+               Q209,246 200,247 Q191,246 186,243 Z"
+            fill="#9a6844"/>
+      <!-- Cupid's bow highlight (upper lip center) -->
+      <path d="M194,237 Q197,235 200,234 Q203,235 206,237"
+            stroke="#b08060" stroke-width="0.8" fill="none" opacity="0.5"/>
+
+      <!-- Lower lip -->
+      <path d="M186,243 Q193,250 200,251 Q207,250 214,243
+               Q208,248 200,249 Q192,248 186,243 Z"
+            fill="#b07858" opacity="0.75"/>
+      <!-- Lower lip highlight -->
+      <ellipse cx="200" cy="248" rx="7" ry="2.5" fill="#c89870" opacity="0.3" filter="url(#softBlur)"/>
+
+      <!-- Mouth line (the subtle smile) -->
+      <path d="M186,243 Q190,245 196,244 Q200,243.5 204,244
+               Q210,245 214,243"
+            stroke="#6a3820" stroke-width="1.3" fill="none"/>
+      <!-- Left smile corner (barely turned up) -->
+      <path d="M186,243 Q184.5,244.5 185.5,246"
+            stroke="#7a4830" stroke-width="1" fill="none" opacity="0.7"/>
+      <!-- Right smile corner -->
+      <path d="M214,243 Q215.5,244.5 214.5,246"
+            stroke="#7a4830" stroke-width="1" fill="none" opacity="0.7"/>
+
+      <!-- ============================================================ -->
+      <!-- HANDS (resting on balustrade)                               -->
+      <!-- ============================================================ -->
+      <!-- Right arm resting on ledge -->
+      <path d="M215,455 Q232,448 248,450 Q262,453 270,460
+               Q275,465 272,472 L200,472 L215,455 Z"
+            fill="url(#handG)"/>
+      <!-- Left arm beneath -->
+      <path d="M130,465 Q148,455 168,452 Q184,450 200,455
+               L200,472 L128,472 Q126,468 130,465 Z"
+            fill="url(#handG)" opacity="0.85"/>
+
+      <!-- Right hand fingers suggestion -->
+      <path d="M222,449 Q220,440 221,432" stroke="#b08858" stroke-width="2" fill="none" opacity="0.6"/>
+      <path d="M232,447 Q231,437 232,429" stroke="#b08858" stroke-width="2" fill="none" opacity="0.6"/>
+      <path d="M242,448 Q242,438 243,430" stroke="#b08858" stroke-width="2" fill="none" opacity="0.5"/>
+      <!-- Knuckle hints -->
+      <path d="M220,448 Q224,445 228,446 Q234,445 238,447 Q244,446 248,448"
+            stroke="#c09868" stroke-width="0.8" fill="none" opacity="0.4"/>
+
+      <!-- ============================================================ -->
+      <!-- SFUMATO OVERLAYS (atmosphere and depth)                      -->
+      <!-- ============================================================ -->
+      <!-- Warm amber glaze over whole painting -->
+      <rect x="68" y="0" width="264" height="570" fill="#4a3010" opacity="0.06"/>
+      <!-- Atmospheric haze in background -->
+      <rect x="68" y="0" width="264" height="230" fill="#a8c0c8" opacity="0.08"/>
+
+      <!-- ============================================================ -->
+      <!-- VIGNETTE                                                     -->
+      <!-- ============================================================ -->
+      <rect width="400" height="570" fill="url(#vigG)"/>
+
+      <!-- ============================================================ -->
+      <!-- BORDER                                                       -->
+      <!-- ============================================================ -->
+      <rect x="1" y="1" width="398" height="568" fill="none" stroke="#3a2810" stroke-width="2"/>
+    </svg>
+  </div>
+</body>
+</html>
