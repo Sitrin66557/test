@@ -70,39 +70,48 @@ async function fetchWithTimeout(url, ms = 6000) {
 }
 
 /* ── LIVE FETCH ────────────────────────────────────── */
-const SYM = STOCKS.map(s => s.symbol).join(',');
-const YAHOO = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${SYM}&fields=regularMarketPrice,regularMarketChange,regularMarketChangePercent,regularMarketPreviousClose,shortName`;
+function parseYFResult(results) {
+  return results.map(q => ({
+    symbol:    q.symbol,
+    name:      q.shortName || q.symbol,
+    price:     q.regularMarketPrice,
+    change:    q.regularMarketChange,
+    changePct: q.regularMarketChangePercent,
+    prevClose: q.regularMarketPreviousClose,
+    isDemo:    false,
+  }));
+}
 
 async function fetchLive() {
+  // 1. Try our local server proxy first (no CORS, real data)
+  try {
+    const r = await fetchWithTimeout('/api/quotes', 6000);
+    if (r.ok) {
+      const json = await r.json();
+      const results = json?.quoteResponse?.result;
+      if (results?.length) return parseYFResult(results);
+    }
+  } catch (_) { /* server not running, fall through */ }
+
+  // 2. Fall back to public CORS proxies
+  const SYM   = STOCKS.map(s => s.symbol).join(',');
+  const YAHOO = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${SYM}&fields=regularMarketPrice,regularMarketChange,regularMarketChangePercent,regularMarketPreviousClose,shortName`;
   const proxies = [
     `https://corsproxy.io/?${encodeURIComponent(YAHOO)}`,
     `https://api.allorigins.win/raw?url=${encodeURIComponent(YAHOO)}`,
-    `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(YAHOO)}`,
   ];
 
   for (const url of proxies) {
     try {
       const r = await fetchWithTimeout(url, 7000);
       if (!r.ok) continue;
-      const txt = await r.text();
-      const json = JSON.parse(txt);
+      const json = JSON.parse(await r.text());
       const results = json?.quoteResponse?.result;
-      if (!results?.length) continue;
-
-      return results.map(q => ({
-        symbol:    q.symbol,
-        name:      q.shortName || q.symbol,
-        price:     q.regularMarketPrice,
-        change:    q.regularMarketChange,
-        changePct: q.regularMarketChangePercent,
-        prevClose: q.regularMarketPreviousClose,
-        isDemo:    false,
-      }));
-    } catch (_) {
-      // try next proxy
-    }
+      if (results?.length) return parseYFResult(results);
+    } catch (_) { /* try next */ }
   }
-  return null; // all failed
+
+  return null; // everything failed — caller uses mock data
 }
 
 /* ── RENDER ────────────────────────────────────────── */

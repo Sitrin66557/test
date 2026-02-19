@@ -1,0 +1,12 @@
+{
+  "name": "dracula-market-crypt",
+  "version": "1.0.0",
+  "description": "Dracula-themed stock tracker",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
