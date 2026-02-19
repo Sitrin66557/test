@@ -3,185 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dracula's Market Crypt</title>
+  <title>🧛 Dracula's Market Crypt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- Night sky background -->
-  <div class="night-sky">
-    <div class="moon"></div>
-    <div class="stars" id="stars"></div>
-    <div class="cloud cloud-1"></div>
-    <div class="cloud cloud-2"></div>
-  </div>
+  <div class="bg-stars" id="bg-stars"></div>
 
-  <!-- Castle silhouette at bottom -->
-  <div class="castle-container">
-    <svg class="castle-svg" viewBox="0 0 1000 260" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
-      <rect x="0" y="220" width="1000" height="60" fill="#070010"/>
-      <!-- Far left tower -->
-      <rect x="30" y="140" width="70" height="80" fill="#070010"/>
-      <rect x="22" y="118" width="18" height="28" fill="#070010"/>
-      <rect x="48" y="118" width="18" height="28" fill="#070010"/>
-      <rect x="74" y="118" width="18" height="28" fill="#070010"/>
-      <rect x="48" y="160" width="14" height="20" rx="7" fill="#1a0030" opacity="0.7"/>
-      <!-- Left tower -->
-      <rect x="180" y="100" width="100" height="120" fill="#070010"/>
-      <rect x="172" y="78" width="20" height="30" fill="#070010"/>
-      <rect x="200" y="78" width="20" height="30" fill="#070010"/>
-      <rect x="228" y="78" width="20" height="30" fill="#070010"/>
-      <rect x="256" y="78" width="20" height="30" fill="#070010"/>
-      <rect x="200" y="140" width="16" height="22" rx="8" fill="#ffcc4477" opacity="0.5"/>
-      <!-- Center keep -->
-      <rect x="370" y="50" width="260" height="170" fill="#070010"/>
-      <rect x="360" y="28" width="22" height="32" fill="#070010"/>
-      <rect x="394" y="28" width="22" height="32" fill="#070010"/>
-      <rect x="428" y="28" width="22" height="32" fill="#070010"/>
-      <rect x="462" y="28" width="22" height="32" fill="#070010"/>
-      <rect x="496" y="28" width="22" height="32" fill="#070010"/>
-      <rect x="530" y="28" width="22" height="32" fill="#070010"/>
-      <rect x="564" y="28" width="22" height="32" fill="#070010"/>
-      <rect x="598" y="28" width="22" height="32" fill="#070010"/>
-      <!-- Gate arch -->
-      <rect x="460" y="155" width="80" height="65" rx="40" fill="#0e0018"/>
-      <!-- Center windows with glow -->
-      <rect x="400" y="90" width="18" height="26" rx="9" fill="#ff440077" opacity="0.7"/>
-      <rect x="440" y="90" width="18" height="26" rx="9" fill="#ffcc4477" opacity="0.6"/>
-      <rect x="480" y="90" width="18" height="26" rx="9" fill="#ff440077" opacity="0.7"/>
-      <rect x="540" y="90" width="18" height="26" rx="9" fill="#ffcc4477" opacity="0.6"/>
-      <rect x="580" y="90" width="18" height="26" rx="9" fill="#ff440077" opacity="0.7"/>
-      <!-- Right tower -->
-      <rect x="720" y="100" width="100" height="120" fill="#070010"/>
-      <rect x="712" y="78" width="20" height="30" fill="#070010"/>
-      <rect x="740" y="78" width="20" height="30" fill="#070010"/>
-      <rect x="768" y="78" width="20" height="30" fill="#070010"/>
-      <rect x="796" y="78" width="20" height="30" fill="#070010"/>
-      <rect x="746" y="140" width="16" height="22" rx="8" fill="#ff440055" opacity="0.5"/>
-      <!-- Far right tower -->
-      <rect x="900" y="140" width="70" height="80" fill="#070010"/>
-      <rect x="892" y="118" width="18" height="28" fill="#070010"/>
-      <rect x="918" y="118" width="18" height="28" fill="#070010"/>
-      <rect x="944" y="118" width="18" height="28" fill="#070010"/>
-      <rect x="916" y="160" width="14" height="20" rx="7" fill="#1a0030" opacity="0.7"/>
-      <!-- Connecting walls -->
-      <rect x="100" y="180" width="80" height="40" fill="#070010"/>
-      <rect x="280" y="170" width="90" height="50" fill="#070010"/>
-      <rect x="630" y="170" width="90" height="50" fill="#070010"/>
-      <rect x="820" y="180" width="80" height="40" fill="#070010"/>
-    </svg>
-  </div>
-
-  <!-- Bats container -->
-  <div class="bats-container" id="bats-container"></div>
-
-  <!-- Header -->
-  <header class="crypt-header">
+  <header>
     <div class="header-inner">
-
-      <!-- Dracula SVG character -->
-      <div class="dracula-figure">
-        <svg viewBox="0 0 140 210" xmlns="http://www.w3.org/2000/svg" class="dracula-svg" id="draculaSvg">
-          <!-- Cape left wing -->
-          <path d="M70,95 C45,108 12,140 6,195 C28,172 52,168 70,173 Z" fill="#1a002e"/>
-          <!-- Cape right wing -->
-          <path d="M70,95 C95,108 128,140 134,195 C112,172 88,168 70,173 Z" fill="#1a002e"/>
-          <!-- Body -->
-          <rect x="50" y="95" width="40" height="65" rx="5" fill="#1a002e"/>
-          <!-- Shirt front -->
-          <rect x="59" y="100" width="22" height="42" rx="3" fill="#f2f2f0"/>
-          <!-- Lapels -->
-          <polygon points="70,102 50,95 56,122" fill="#1a002e"/>
-          <polygon points="70,102 90,95 84,122" fill="#1a002e"/>
-          <!-- Bow tie -->
-          <polygon points="63,107 70,113 63,119" fill="#cc0000"/>
-          <polygon points="77,107 70,113 77,119" fill="#cc0000"/>
-          <circle cx="70" cy="113" r="3.5" fill="#880000"/>
-          <!-- Buttons -->
-          <circle cx="70" cy="128" r="2.5" fill="#aaa"/>
-          <circle cx="70" cy="136" r="2.5" fill="#aaa"/>
-          <!-- Head -->
-          <ellipse cx="70" cy="58" rx="30" ry="34" fill="#f0d0b8"/>
-          <!-- Widow's peak hair -->
-          <path d="M40,44 Q50,16 70,22 Q90,16 100,44 Q85,32 70,34 Q55,32 40,44 Z" fill="#0d0018"/>
-          <!-- Ears -->
-          <ellipse cx="41" cy="58" rx="9" ry="11" fill="#f0d0b8"/>
-          <ellipse cx="99" cy="58" rx="9" ry="11" fill="#f0d0b8"/>
-          <ellipse cx="41" cy="58" rx="6" ry="8" fill="#e0b898"/>
-          <ellipse cx="99" cy="58" rx="6" ry="8" fill="#e0b898"/>
-          <!-- Eyes (glowing red) -->
-          <ellipse cx="56" cy="55" rx="9" ry="10" fill="white"/>
-          <ellipse cx="84" cy="55" rx="9" ry="10" fill="white"/>
-          <ellipse cx="56" cy="56" rx="7" ry="8" fill="#cc0000"/>
-          <ellipse cx="84" cy="56" rx="7" ry="8" fill="#cc0000"/>
-          <ellipse cx="56" cy="57" rx="4" ry="5" fill="#220000"/>
-          <ellipse cx="84" cy="57" rx="4" ry="5" fill="#220000"/>
-          <circle cx="57" cy="55" r="2" fill="white"/>
-          <circle cx="85" cy="55" r="2" fill="white"/>
-          <!-- Eyebrows (menacing) -->
-          <path d="M47,43 Q56,37 65,43" stroke="#0d0018" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <path d="M75,43 Q84,37 93,43" stroke="#0d0018" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <!-- Nose -->
-          <path d="M67,68 L64,76 Q70,80 76,76 L73,68" fill="#dda080"/>
-          <!-- Mouth smirk -->
-          <path d="M52,87 Q70,100 88,87" stroke="#880000" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <!-- Fangs -->
-          <rect x="61" y="88" width="6" height="13" rx="3" fill="white"/>
-          <rect x="73" y="88" width="6" height="13" rx="3" fill="white"/>
-          <!-- Blood on fangs -->
-          <ellipse cx="64" cy="102" rx="3.5" ry="4.5" fill="#cc0000" class="fang-blood"/>
-          <ellipse cx="76" cy="105" rx="3" ry="4" fill="#cc0000" class="fang-blood"/>
-          <!-- Cape collar spikes -->
-          <path d="M40,95 L18,76 L46,90 Z" fill="#1a002e"/>
-          <path d="M100,95 L122,76 L94,90 Z" fill="#1a002e"/>
+      <div class="dracula-wrap">
+        <!-- SVG Dracula -->
+        <svg class="drac-svg" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50,65 C30,75 8,100 4,145 C22,128 40,124 50,128 Z" fill="#1a002e"/>
+          <path d="M50,65 C70,75 92,100 96,145 C78,128 60,124 50,128 Z" fill="#1a002e"/>
+          <rect x="36" y="67" width="28" height="50" rx="4" fill="#1a002e"/>
+          <rect x="43" y="71" width="14" height="32" rx="2" fill="#f5f5f0"/>
+          <polygon points="50,73 36,67 40,88" fill="#1a002e"/>
+          <polygon points="50,73 64,67 60,88" fill="#1a002e"/>
+          <polygon points="44,77 50,82 44,87" fill="#cc0000"/>
+          <polygon points="56,77 50,82 56,87" fill="#cc0000"/>
+          <circle cx="50" cy="82" r="2.5" fill="#880000"/>
+          <ellipse cx="50" cy="38" rx="22" ry="25" fill="#f0d0b8"/>
+          <path d="M28,26 Q36,10 50,14 Q64,10 72,26 Q60,18 50,20 Q40,18 28,26 Z" fill="#0d0018"/>
+          <ellipse cx="29" cy="38" rx="7" ry="8" fill="#f0d0b8"/>
+          <ellipse cx="71" cy="38" rx="7" ry="8" fill="#f0d0b8"/>
+          <ellipse cx="39" cy="36" rx="7" ry="8" fill="white"/>
+          <ellipse cx="61" cy="36" rx="7" ry="8" fill="white"/>
+          <ellipse cx="39" cy="37" rx="5" ry="6" fill="#cc0000"/>
+          <ellipse cx="61" cy="37" rx="5" ry="6" fill="#cc0000"/>
+          <ellipse cx="39" cy="38" rx="2.5" ry="3" fill="#110000"/>
+          <ellipse cx="61" cy="38" rx="2.5" ry="3" fill="#110000"/>
+          <circle cx="40" cy="36" r="1.5" fill="white"/>
+          <circle cx="62" cy="36" r="1.5" fill="white"/>
+          <path d="M32,26 Q39,22 46,27" stroke="#0d0018" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M54,27 Q61,22 68,26" stroke="#0d0018" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M37,56 Q50,65 63,56" stroke="#880000" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <rect x="44" y="57" width="4" height="9" rx="2" fill="white"/>
+          <rect x="52" y="57" width="4" height="9" rx="2" fill="white"/>
+          <circle cx="46" cy="67" r="2.5" fill="#cc0000"/>
+          <circle cx="54" cy="69" r="2" fill="#cc0000"/>
+          <path d="M28,65 L12,52 L34,62 Z" fill="#1a002e"/>
+          <path d="M72,65 L88,52 L66,62 Z" fill="#1a002e"/>
         </svg>
-        <div class="dracula-nameplate">COUNT DRACULA<br><span>Chief Market Analyst</span></div>
+        <p class="drac-title">COUNT DRACULA</p>
+        <p class="drac-sub">Chief Market Analyst</p>
       </div>
 
-      <!-- Title text -->
-      <div class="header-text">
-        <h1 class="crypt-title">DRACULA'S<br><span class="title-red">MARKET CRYPT</span></h1>
-        <p class="crypt-tagline">"I vant to suck your <span class="blood-word">PROFITS</span>"</p>
-        <div class="header-icons">🦇 &nbsp;⚰️&nbsp; 🦇</div>
-        <p class="header-note">Five victims tracked nightly from the shadows of Wall Street</p>
+      <div class="title-block">
+        <h1>DRACULA'S<br><span>MARKET CRYPT</span></h1>
+        <p class="tagline">"I vant to suck your <em>profits</em>..."</p>
+        <p class="sub-tagline">Live tracking: Oracle · Google · Microsoft · Meta · Amazon</p>
       </div>
-
     </div>
   </header>
 
-  <!-- Status bar -->
-  <div class="status-bar">
-    <span class="status-dot-wrap"><span class="status-dot" id="status-dot"></span></span>
-    <span id="market-status-text">Awakening from the crypt...</span>
-    <span class="status-right">
-      <span id="last-updated"></span>
-      <span class="refresh-pill">Auto-refresh 30s</span>
-    </span>
+  <div class="status-row">
+    <span class="dot" id="dot"></span>
+    <span id="status-msg">Summoning market data from the underworld…</span>
+    <span class="updated" id="updated"></span>
+    <span class="data-badge" id="data-badge"></span>
   </div>
 
-  <!-- Main stocks grid -->
-  <main class="main-content">
-    <div class="stocks-grid" id="stocks-grid">
-      <div class="loading-state" id="loading-state">
-        <div class="coffin-bounce">⚰️</div>
-        <p>Rising from the crypt...</p>
-        <p class="loading-sub">Dracula is counting your losses</p>
+  <main>
+    <div class="grid" id="grid">
+      <div class="loading" id="loading">
+        <span class="coffin">⚰️</span>
+        <p>Rising from the crypt…</p>
       </div>
     </div>
-
-    <div class="blood-moon-banner" id="blood-moon-banner" style="display:none">
-      <span>🌑 &nbsp; BLOOD MOON — ALL STOCKS BITTEN &nbsp; 🌑</span>
+    <div class="blood-moon" id="blood-moon" style="display:none">
+      🌑 BLOOD MOON — ALL STOCKS BITTEN TONIGHT 🌑
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="crypt-footer">
-    <div class="footer-bats">🦇 &nbsp; 🦇 &nbsp; 🦇</div>
-    <p>Stock data sourced from the financial underworld via Yahoo Finance</p>
-    <p class="footer-disclaimer">Count Dracula is not a licensed financial advisor. Data may be delayed 15 minutes.</p>
-    <p class="footer-disclaimer">Past bloodsucking is not indicative of future bloodsucking.</p>
+  <footer>
+    <div class="bats">🦇 &nbsp;🦇 &nbsp;🦇</div>
+    <p>Data via Yahoo Finance · Refreshes every 30s</p>
+    <p class="disc">Count Dracula is not a licensed financial advisor. Data may be delayed 15 min.</p>
   </footer>
+
+  <div class="flying-bats" id="flying-bats"></div>
 
   <script src="script.js"></script>
 </body>
