@@ -330,10 +330,13 @@ img, svg { display: block; }
 
 .about__grid {
   display: grid;
-  grid-template-columns: 1fr 1.5fr;
+  grid-template-columns: 1.5fr 1fr;
   gap: 72px;
   align-items: center;
 }
+
+.about__grid .about__text { order: 1; }
+.about__grid .about__image { order: 2; }
 
 .about__img-wrapper { position: relative; display: inline-block; }
 
@@ -734,6 +737,8 @@ img, svg { display: block; }
 
 @media (max-width: 860px) {
   .about__grid { grid-template-columns: 1fr; gap: 48px; text-align: center; }
+  .about__grid .about__text { order: 1; }
+  .about__grid .about__image { order: 2; }
   .about__img-placeholder { max-width: 300px; margin: 0 auto; }
   .about__stats { justify-content: center; }
   .contact__wrapper { grid-template-columns: 1fr; gap: 48px; }
