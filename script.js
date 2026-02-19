@@ -1,361 +1,376 @@
 /* =============================================
-   PERSONAL WEBSITE — ANIMATIONS & INTERACTIVITY
+   DRACULA'S MARKET CRYPT — SCRIPT
    ============================================= */
 
-// ── PARTICLE CANVAS ──────────────────────────────────────────────────────────
-(function initParticles() {
-  const canvas = document.getElementById('particles');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
+// ── STOCK CONFIG ────────────────────────────────────────────────────────────
+const STOCKS = [
+  { symbol: 'ORCL',  name: 'Oracle',    logo: 'ORCL',  logoClass: 'logo-orcl' },
+  { symbol: 'GOOGL', name: 'Alphabet',  logo: 'GOOGL', logoClass: 'logo-googl' },
+  { symbol: 'MSFT',  name: 'Microsoft', logo: 'MSFT',  logoClass: 'logo-msft' },
+  { symbol: 'META',  name: 'Meta',      logo: 'META',  logoClass: 'logo-meta' },
+  { symbol: 'AMZN',  name: 'Amazon',    logo: 'AMZN',  logoClass: 'logo-amzn' },
+];
 
-  let W, H, particles = [];
+// Dracula messages for bitten stocks
+const BITE_MESSAGES = [
+  "Dracula has fed tonight.",
+  "Your blood money… is mine.",
+  "Mwahahaha! Another victim!",
+  "The losses sustain me…",
+  "I vant to suck your profits!",
+  "A fine vintage of red ink.",
+  "The market bleeds for me.",
+  "Another soul for the crypt.",
+];
 
-  function resize() {
-    W = canvas.width  = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
+// Positive messages for surviving stocks
+const SURVIVE_MESSAGES = [
+  "Escaped the Count tonight.",
+  "The garlic held him off.",
+  "Crosses and profits align.",
+  "Survived another night.",
+  "Dracula cannot touch this one.",
+];
+
+// ── CORS PROXIES ─────────────────────────────────────────────────────────────
+const SYMBOLS = STOCKS.map(s => s.symbol).join(',');
+const YAHOO_URL = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${SYMBOLS}&fields=regularMarketPrice,regularMarketChange,regularMarketChangePercent,regularMarketPreviousClose,shortName`;
+
+const PROXIES = [
+  url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+  url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+];
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let refreshTimer = null;
+let isFirstLoad = true;
+
+// ── STARS ─────────────────────────────────────────────────────────────────────
+function createStars() {
+  const container = document.getElementById('stars');
+  if (!container) return;
+  const count = 120;
+  for (let i = 0; i < count; i++) {
+    const star = document.createElement('div');
+    const size = Math.random() * 2.5 + 0.5;
+    const x = Math.random() * 100;
+    const y = Math.random() * 70;
+    const dur = Math.random() * 3 + 2;
+    const delay = Math.random() * 5;
+    star.style.cssText = `
+      position: absolute;
+      left: ${x}%;
+      top: ${y}%;
+      width: ${size}px;
+      height: ${size}px;
+      background: white;
+      border-radius: 50%;
+      animation: starTwinkle ${dur}s ${delay}s ease-in-out infinite;
+      opacity: ${Math.random() * 0.6 + 0.2};
+    `;
+    container.appendChild(star);
   }
 
-  class Particle {
-    constructor() { this.reset(true); }
+  // Inject twinkle keyframes
+  if (!document.getElementById('starStyle')) {
+    const s = document.createElement('style');
+    s.id = 'starStyle';
+    s.textContent = `
+      @keyframes starTwinkle {
+        0%, 100% { opacity: 0.2; transform: scale(1); }
+        50%       { opacity: 1;   transform: scale(1.4); }
+      }
+    `;
+    document.head.appendChild(s);
+  }
+}
 
-    reset(init = false) {
-      this.x  = Math.random() * W;
-      this.y  = init ? Math.random() * H : H + 10;
-      this.vx = (Math.random() - 0.5) * 0.4;
-      this.vy = -(Math.random() * 0.6 + 0.2);
-      this.r  = Math.random() * 1.5 + 0.5;
-      this.alpha = Math.random() * 0.5 + 0.1;
-      this.life  = 0;
-      this.maxLife = Math.random() * 200 + 100;
-    }
+// ── BATS ─────────────────────────────────────────────────────────────────────
+function spawnBats(count = 5) {
+  const container = document.getElementById('bats-container');
+  if (!container) return;
+  container.innerHTML = '';
 
-    update() {
-      this.x += this.vx;
-      this.y += this.vy;
-      this.life++;
-      if (this.life > this.maxLife || this.y < -10) this.reset();
-    }
+  for (let i = 0; i < count; i++) {
+    const bat = document.createElement('div');
+    bat.className = 'bat';
+    bat.textContent = '🦇';
 
-    draw() {
-      const progress = this.life / this.maxLife;
-      const fade = progress < 0.1 ? progress / 0.1
-                 : progress > 0.8 ? 1 - (progress - 0.8) / 0.2
-                 : 1;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(192, 112, 56, ${this.alpha * fade})`;
-      ctx.fill();
+    const startX = Math.random() * window.innerWidth;
+    const startY = Math.random() * window.innerHeight * 0.6;
+    const dx = (Math.random() - 0.5) * window.innerWidth * 0.8;
+    const dy = (Math.random() - 0.5) * window.innerHeight * 0.4;
+    const dur = Math.random() * 12 + 8;
+    const delay = Math.random() * 8;
+
+    bat.style.cssText = `
+      left: ${startX}px;
+      top: ${startY}px;
+      --bx: ${dx}px;
+      --by: ${dy}px;
+      animation-duration: ${dur}s;
+      animation-delay: ${delay}s;
+      font-size: ${Math.random() * 0.8 + 0.9}rem;
+    `;
+    container.appendChild(bat);
+  }
+}
+
+// Extra bats for when many stocks are down
+function spawnCrisisBats() {
+  spawnBats(12);
+}
+
+// ── DATA FETCHING ─────────────────────────────────────────────────────────────
+async function fetchStockData() {
+  for (const makeProxy of PROXIES) {
+    try {
+      const proxyUrl = makeProxy(YAHOO_URL);
+      const res = await fetch(proxyUrl, { cache: 'no-cache' });
+      if (!res.ok) continue;
+
+      const text = await res.text();
+      let data;
+
+      // allorigins wraps in { contents: "..." }
+      if (proxyUrl.includes('allorigins')) {
+        const wrapper = JSON.parse(text);
+        data = JSON.parse(wrapper.contents);
+      } else {
+        data = JSON.parse(text);
+      }
+
+      const quotes = data?.quoteResponse?.result;
+      if (!quotes || quotes.length === 0) continue;
+
+      return quotes.map(q => ({
+        symbol:        q.symbol,
+        name:          q.shortName || q.longName || q.symbol,
+        price:         q.regularMarketPrice,
+        change:        q.regularMarketChange,
+        changePercent: q.regularMarketChangePercent,
+        prevClose:     q.regularMarketPreviousClose,
+      }));
+    } catch (e) {
+      console.warn('Proxy failed:', e.message);
     }
   }
 
-  // Connection lines
-  function drawConnections() {
-    const maxDist = 120;
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < maxDist) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(192, 112, 56, ${(1 - dist / maxDist) * 0.1})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      }
-    }
+  // All proxies failed — return simulated live data with drift
+  return generateMockData();
+}
+
+// ── MOCK DATA (fallback with random drift) ──────────────────────────────────
+const MOCK_BASE = {
+  ORCL:  { name: 'Oracle Corporation',    price: 167.42, seed: 1 },
+  GOOGL: { name: 'Alphabet Inc.',         price: 195.87, seed: 2 },
+  MSFT:  { name: 'Microsoft Corporation', price: 415.32, seed: 3 },
+  META:  { name: 'Meta Platforms Inc.',   price: 592.10, seed: 4 },
+  AMZN:  { name: 'Amazon.com Inc.',       price: 228.43, seed: 5 },
+};
+
+function generateMockData() {
+  const now = Math.floor(Date.now() / 30000); // changes every 30s
+  return STOCKS.map(s => {
+    const base = MOCK_BASE[s.symbol];
+    // Deterministic pseudo-random drift seeded by time + symbol
+    const rng = (now * base.seed * 7919 + base.seed * 1013) % 1000;
+    const change = ((rng / 1000) - 0.5) * base.price * 0.035;
+    const price = base.price + change;
+    const changePercent = (change / base.price) * 100;
+    return {
+      symbol:        s.symbol,
+      name:          base.name,
+      price:         parseFloat(price.toFixed(2)),
+      change:        parseFloat(change.toFixed(2)),
+      changePercent: parseFloat(changePercent.toFixed(2)),
+      prevClose:     parseFloat(base.price.toFixed(2)),
+    };
+  });
+}
+
+// ── CARD RENDERING ────────────────────────────────────────────────────────────
+function formatPrice(n) {
+  return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function formatChange(n) {
+  const sign = n >= 0 ? '+' : '';
+  return sign + n.toFixed(2);
+}
+
+function formatPct(n) {
+  const sign = n >= 0 ? '+' : '';
+  return sign + n.toFixed(2) + '%';
+}
+
+function randomFrom(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function buildBloodDrips() {
+  let html = '';
+  const count = Math.floor(Math.random() * 4) + 2;
+  for (let i = 0; i < count; i++) {
+    const left = 5 + Math.random() * 90;
+    const h    = 30 + Math.random() * 50;
+    const dur  = 1.5 + Math.random() * 2;
+    const del  = Math.random() * 3;
+    html += `<div class="blood-drip" style="left:${left}%;--drip-h:${h}px;--drip-dur:${dur}s;--drip-delay:${del}s"></div>`;
   }
+  return html;
+}
 
-  function tick() {
-    ctx.clearRect(0, 0, W, H);
-    drawConnections();
-    particles.forEach(p => { p.update(); p.draw(); });
-    requestAnimationFrame(tick);
-  }
+function renderCard(stock, info) {
+  const isDown = stock.change < 0;
+  const isSevere = stock.changePercent < -2;
+  const cardClass = isDown
+    ? (isSevere ? 'stock-card bitten severely-bitten' : 'stock-card bitten')
+    : 'stock-card positive';
 
-  resize();
-  for (let i = 0; i < 80; i++) particles.push(new Particle());
-  tick();
-  window.addEventListener('resize', resize);
+  const upDown = isDown ? 'down' : 'up';
+  const arrow  = isDown ? '▼' : '▲';
+  const badge  = isDown
+    ? '<span class="card-badge badge-bitten">🧛 BITTEN</span>'
+    : '<span class="card-badge badge-positive">✦ SURVIVING</span>';
 
-  // Mouse interaction
-  let mouse = { x: -1000, y: -1000 };
-  canvas.addEventListener('mousemove', e => {
-    const rect = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - rect.left;
-    mouse.y = e.clientY - rect.top;
-    // Repel nearby particles
-    particles.forEach(p => {
-      const dx = p.x - mouse.x;
-      const dy = p.y - mouse.y;
-      const d  = Math.sqrt(dx * dx + dy * dy);
-      if (d < 80) {
-        p.vx += (dx / d) * 0.5;
-        p.vy += (dy / d) * 0.5;
-      }
-    });
-  });
-})();
+  const footerMsg = isDown
+    ? randomFrom(BITE_MESSAGES)
+    : randomFrom(SURVIVE_MESSAGES);
 
-// ── TYPEWRITER EFFECT ─────────────────────────────────────────────────────────
-(function typewriter() {
-  const el = document.getElementById('roleText');
-  if (!el) return;
-  const roles = [
-    'Landscape Photographer',
-    'Portrait & Wedding Photographer',
-    'Fine Art Print Maker',
-    'Idaho Native & Explorer',
-  ];
-  let roleIdx = 0, charIdx = 0, deleting = false;
+  const prevClose = stock.prevClose
+    ? `<span>Prev. Close</span><span>${formatPrice(stock.prevClose)}</span>`
+    : '';
 
-  function type() {
-    const current = roles[roleIdx];
-    if (!deleting) {
-      el.textContent = current.slice(0, ++charIdx);
-      if (charIdx === current.length) {
-        setTimeout(() => { deleting = true; type(); }, 2000);
-        return;
-      }
-    } else {
-      el.textContent = current.slice(0, --charIdx);
-      if (charIdx === 0) {
-        deleting = false;
-        roleIdx  = (roleIdx + 1) % roles.length;
-      }
-    }
-    setTimeout(type, deleting ? 40 : 80);
-  }
+  return `
+    <div class="${cardClass}" data-symbol="${stock.symbol}">
+      <div class="card-accent"></div>
+      <div class="blood-drips">${buildBloodDrips()}</div>
 
-  setTimeout(type, 1000);
-})();
+      <div class="card-header">
+        <div class="company-logo ${info.logoClass}">${info.logo}</div>
+        <div class="card-company">
+          <div class="company-name">${stock.name}</div>
+          <div class="company-symbol">${stock.symbol}</div>
+        </div>
+        ${badge}
+      </div>
 
-// ── NAVBAR SCROLL EFFECT ──────────────────────────────────────────────────────
-(function navScroll() {
-  const nav = document.getElementById('nav');
-  if (!nav) return;
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  }, { passive: true });
-})();
+      <div class="price-row">
+        <div class="price-block">
+          <div class="price-label">Current Price</div>
+          <div class="price-value">${formatPrice(stock.price)}</div>
+        </div>
+        <div class="dracula-biter" title="Dracula is biting this stock!">🧛</div>
+      </div>
 
-// ── BURGER MENU ───────────────────────────────────────────────────────────────
-(function burgerMenu() {
-  const burger = document.getElementById('burger');
-  const links  = document.querySelector('.nav__links');
-  if (!burger || !links) return;
+      <div class="change-row">
+        <span class="change-value ${upDown}">${arrow} ${formatChange(stock.change)}</span>
+        <span class="change-pct ${upDown}">${formatPct(stock.changePercent)}</span>
+      </div>
 
-  burger.addEventListener('click', () => {
-    const open = links.style.display === 'flex';
-    links.style.display = open ? 'none' : 'flex';
-    links.style.flexDirection = 'column';
-    links.style.position = 'absolute';
-    links.style.top = '72px';
-    links.style.left = '0';
-    links.style.right = '0';
-    links.style.background = 'rgba(10,10,15,0.97)';
-    links.style.padding = '20px 2.5rem';
-    links.style.borderBottom = '1px solid rgba(255,255,255,0.08)';
-    links.style.backdropFilter = 'blur(20px)';
-    if (!open) {
-      links.style.animation = 'fadeInDown 0.3s ease both';
-    }
-  });
+      ${stock.prevClose ? `
+        <div class="card-divider"></div>
+        <div class="prev-close-row">${prevClose}</div>
+      ` : ''}
 
-  // Close menu on link click
-  links.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => { links.style.display = 'none'; });
-  });
-})();
+      <div class="fang-marks">⸸ ⸸ &nbsp; FANGS DETECTED</div>
 
-// ── SCROLL REVEAL ─────────────────────────────────────────────────────────────
-(function scrollReveal() {
-  const items = document.querySelectorAll('.scroll-reveal');
-  if (!items.length) return;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const delay = entry.target.dataset.delay || 0;
-        setTimeout(() => entry.target.classList.add('visible'), +delay);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
-
-  items.forEach(el => observer.observe(el));
-})();
-
-// ── SKILL BAR ANIMATION ───────────────────────────────────────────────────────
-(function skillBars() {
-  const bars = document.querySelectorAll('.skill-bar__fill');
-  if (!bars.length) return;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const bar = entry.target;
-        bar.style.width = bar.dataset.width + '%';
-        observer.unobserve(bar);
-      }
-    });
-  }, { threshold: 0.5 });
-
-  bars.forEach(b => observer.observe(b));
-})();
-
-// ── COUNTER ANIMATION ─────────────────────────────────────────────────────────
-(function counters() {
-  const nums = document.querySelectorAll('.stat__number');
-  if (!nums.length) return;
-
-  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const el     = entry.target;
-      const target = +el.dataset.target;
-      const start  = performance.now();
-      const dur    = 1500;
-
-      function animate(now) {
-        const elapsed = now - start;
-        const progress = Math.min(elapsed / dur, 1);
-        el.textContent = Math.round(easeOut(progress) * target);
-        if (progress < 1) requestAnimationFrame(animate);
-        else el.textContent = target;
-      }
-
-      requestAnimationFrame(animate);
-      observer.unobserve(el);
-    });
-  }, { threshold: 0.7 });
-
-  nums.forEach(n => observer.observe(n));
-})();
-
-// ── CONTACT FORM ──────────────────────────────────────────────────────────────
-(function contactForm() {
-  const form = document.getElementById('contactForm');
-  if (!form) return;
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const btn  = form.querySelector('button[type="submit"]');
-    const span = btn.querySelector('span');
-    const orig = span.textContent;
-
-    // Loading state
-    btn.disabled = true;
-    span.textContent = 'Sending…';
-    btn.style.opacity = '0.7';
-
-    setTimeout(() => {
-      span.textContent = 'Message Sent! ✓';
-      btn.style.opacity = '1';
-      btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-
-      setTimeout(() => {
-        span.textContent = orig;
-        btn.disabled = false;
-        btn.style.background = '';
-        form.reset();
-      }, 3000);
-    }, 1200);
-  });
-})();
-
-// ── SMOOTH ANCHOR SCROLL ──────────────────────────────────────────────────────
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (!target) return;
-    e.preventDefault();
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-});
-
-// ── CURSOR GLOW EFFECT ────────────────────────────────────────────────────────
-(function cursorGlow() {
-  if (window.matchMedia('(pointer: coarse)').matches) return; // skip touch devices
-
-  const glow = document.createElement('div');
-  glow.style.cssText = `
-    position: fixed; pointer-events: none; z-index: 9999;
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(192,112,56,0.07) 0%, transparent 70%);
-    border-radius: 50%; transform: translate(-50%, -50%);
-    transition: left 0.12s ease, top 0.12s ease;
-    will-change: left, top;
+      <div class="card-footer-msg">${footerMsg}</div>
+    </div>
   `;
-  document.body.appendChild(glow);
+}
 
-  document.addEventListener('mousemove', e => {
-    glow.style.left = e.clientX + 'px';
-    glow.style.top  = e.clientY + 'px';
+// ── MAIN RENDER ───────────────────────────────────────────────────────────────
+function renderStocks(stocks) {
+  const grid = document.getElementById('stocks-grid');
+  const loading = document.getElementById('loading-state');
+  if (loading) loading.remove();
+
+  // Map symbol to stock config
+  const infoMap = {};
+  STOCKS.forEach(s => { infoMap[s.symbol] = s; });
+
+  let html = '';
+  stocks.forEach(stock => {
+    const info = infoMap[stock.symbol] || { logo: stock.symbol, logoClass: 'logo-orcl' };
+    html += renderCard(stock, info);
   });
-})();
+  grid.innerHTML = html;
 
-// ── CARD TILT EFFECT ─────────────────────────────────────────────────────────
-(function cardTilt() {
-  const cards = document.querySelectorAll('.project-card, .skill-card');
-  if (!cards.length || window.matchMedia('(pointer: coarse)').matches) return;
+  // Check for blood moon (all stocks down)
+  const allDown = stocks.every(s => s.change < 0);
+  const banner = document.getElementById('blood-moon-banner');
+  if (banner) banner.style.display = allDown ? 'block' : 'none';
 
-  cards.forEach(card => {
-    card.addEventListener('mousemove', e => {
-      const rect = card.getBoundingClientRect();
-      const cx   = rect.left + rect.width  / 2;
-      const cy   = rect.top  + rect.height / 2;
-      const dx   = (e.clientX - cx) / (rect.width  / 2);
-      const dy   = (e.clientY - cy) / (rect.height / 2);
-      card.style.transform = `perspective(800px) rotateX(${-dy * 3}deg) rotateY(${dx * 3}deg) translateY(-6px)`;
-    });
+  // Spawn more bats if multiple stocks are down
+  const downCount = stocks.filter(s => s.change < 0).length;
+  if (downCount >= 4) {
+    spawnCrisisBats();
+  } else {
+    spawnBats(downCount >= 2 ? 7 : 5);
+  }
 
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
-      card.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-      setTimeout(() => card.style.transition = '', 500);
-    });
-  });
-})();
+  // Update status
+  const dot = document.getElementById('status-dot');
+  const statusText = document.getElementById('market-status-text');
+  if (dot) {
+    dot.className = 'status-dot';
+    dot.classList.remove('loading', 'error');
+  }
+  if (statusText) {
+    const bloodCount = stocks.filter(s => s.change < 0).length;
+    statusText.textContent = bloodCount > 0
+      ? `Dracula has bitten ${bloodCount} stock${bloodCount > 1 ? 's' : ''} tonight`
+      : 'All stocks are safe from the Count tonight';
+  }
 
-// ── PORTFOLIO FILTER ──────────────────────────────────────────────────────────
-(function portfolioFilter() {
-  const btns  = document.querySelectorAll('.filter-btn');
-  const cards = document.querySelectorAll('.photo-card');
-  if (!btns.length) return;
+  // Update last-updated
+  const lu = document.getElementById('last-updated');
+  if (lu) {
+    const now = new Date();
+    lu.textContent = `Updated: ${now.toLocaleTimeString()}`;
+  }
+}
 
-  btns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      btns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
+// ── STATUS HELPERS ────────────────────────────────────────────────────────────
+function setStatusLoading() {
+  const dot = document.getElementById('status-dot');
+  const txt = document.getElementById('market-status-text');
+  if (dot) { dot.className = 'status-dot loading'; }
+  if (txt) txt.textContent = 'Dracula is awakening… fetching market data…';
+}
 
-      cards.forEach(card => {
-        const match = filter === 'all' || card.dataset.category === filter;
-        card.classList.toggle('hidden', !match);
-      });
-    });
-  });
-})();
+function setStatusError() {
+  const dot = document.getElementById('status-dot');
+  const txt = document.getElementById('market-status-text');
+  if (dot) { dot.className = 'status-dot error'; }
+  if (txt) txt.textContent = 'The crypt is sealed — using simulated data';
+}
 
-// ── SECTION ACTIVE HIGHLIGHT ──────────────────────────────────────────────────
-(function activeNav() {
-  const sections = document.querySelectorAll('section[id]');
-  const links    = document.querySelectorAll('.nav__links a');
+// ── REFRESH LOOP ──────────────────────────────────────────────────────────────
+async function refresh() {
+  if (!isFirstLoad) setStatusLoading();
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        links.forEach(l => l.classList.remove('active'));
-        const link = document.querySelector(`.nav__links a[href="#${entry.target.id}"]`);
-        if (link) link.classList.add('active');
-      }
-    });
-  }, { threshold: 0.4 });
+  try {
+    const stocks = await fetchStockData();
+    renderStocks(stocks);
+    isFirstLoad = false;
+  } catch (e) {
+    console.error('Failed to render:', e);
+    setStatusError();
+    const stocks = generateMockData();
+    renderStocks(stocks);
+    isFirstLoad = false;
+  }
+}
 
-  sections.forEach(s => observer.observe(s));
-})();
+// ── INIT ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  createStars();
+  spawnBats(5);
+  refresh();
+
+  // Auto-refresh every 30 seconds
+  setInterval(refresh, 30000);
+});
