@@ -96,20 +96,43 @@ async function fetchLive() {
   // 2. Fall back to public CORS proxies
   const SYM   = STOCKS.map(s => s.symbol).join(',');
   const YAHOO = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${SYM}&fields=regularMarketPrice,regularMarketChange,regularMarketChangePercent,regularMarketPreviousClose,shortName`;
+  const YAHOO2 = `https://query2.finance.yahoo.com/v7/finance/quote?symbols=${SYM}&fields=regularMarketPrice,regularMarketChange,regularMarketChangePercent,regularMarketPreviousClose,shortName`;
   const proxies = [
     `https://corsproxy.io/?${encodeURIComponent(YAHOO)}`,
+    `https://corsproxy.io/?${encodeURIComponent(YAHOO2)}`,
     `https://api.allorigins.win/raw?url=${encodeURIComponent(YAHOO)}`,
+    `https://api.allorigins.win/raw?url=${encodeURIComponent(YAHOO2)}`,
+    `https://thingproxy.freeboard.io/fetch/${YAHOO}`,
   ];
 
   for (const url of proxies) {
     try {
-      const r = await fetchWithTimeout(url, 7000);
+      const r = await fetchWithTimeout(url, 8000);
       if (!r.ok) continue;
       const json = JSON.parse(await r.text());
       const results = json?.quoteResponse?.result;
       if (results?.length) return parseYFResult(results);
     } catch (_) { /* try next */ }
   }
+
+  // 3. Try v8 chart API per-symbol as last resort
+  try {
+    const charts = await Promise.all(STOCKS.map(async s => {
+      const url = `https://corsproxy.io/?${encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${s.symbol}?range=1d&interval=1d`)}`;
+      const r = await fetchWithTimeout(url, 8000);
+      if (!r.ok) return null;
+      const j = JSON.parse(await r.text());
+      const meta = j?.chart?.result?.[0]?.meta;
+      if (!meta) return null;
+      const price = meta.regularMarketPrice;
+      const prev  = meta.previousClose ?? meta.chartPreviousClose;
+      const change = parseFloat((price - prev).toFixed(2));
+      const changePct = parseFloat(((change / prev) * 100).toFixed(2));
+      return { symbol: s.symbol, name: s.fullName, price, change, changePct, prevClose: prev, isDemo: false };
+    }));
+    const valid = charts.filter(Boolean);
+    if (valid.length === STOCKS.length) return valid;
+  } catch (_) { /* fall through */ }
 
   return null; // everything failed — caller uses mock data
 }
